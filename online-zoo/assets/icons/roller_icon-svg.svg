@@ -1,0 +1,13 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
+	<title>roller_icon-svg</title>
+	<defs>
+		<image width="10" height="10" id="img1" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHZpZXdCb3g9IjAgMCAxMCAxMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjUiIGZpbGw9IiNGRkVFMkUiLz4KPC9zdmc+Cg=="/>
+	</defs>
+	<style>
+		tspan { white-space:pre }
+		.shp0 { fill: #fe9013 } 
+	</style>
+	<path id="Layer" fill-rule="evenodd" class="shp0" d="M31.48 20C31.48 26.34 26.34 31.48 20 31.48C13.66 31.48 8.52 26.34 8.52 20C8.52 13.66 13.66 8.52 20 8.52C26.34 8.52 31.48 13.66 31.48 20ZM10.32 20C10.32 25.38 14.63 29.73 20 29.73C25.38 29.73 29.73 25.38 29.73 20C29.73 14.62 25.38 10.31 20 10.31C14.63 10.31 10.32 14.62 10.32 20Z" />
+	<path id="Layer" fill-rule="evenodd" class="shp0" d="M20 0C31.04 0 40 8.96 40 20C40 31.04 31.04 40 20 40C8.96 40 0 31.04 0 20C0 8.96 8.96 0 20 0ZM1.79 20C1.79 30.07 9.93 38.26 20 38.26C30.07 38.26 38.26 30.07 38.26 20C38.26 9.93 30.07 1.79 20 1.79C9.93 1.79 1.79 9.93 1.79 20Z" />
+	<use id="Ellipse 9" href="#img1" transform="matrix(1,0,0,1,15,15)"/>
+</svg>
