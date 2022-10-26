@@ -1,6 +1,9 @@
 body,
 html {
     font: 16px/1.4 Georgia, serif;
+}
+
+body {
     background: url(https://images.unsplash.com/photo-1539622106114-e0df812097e6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80);
     background-size: cover;
     background-repeat: no-repeat;
