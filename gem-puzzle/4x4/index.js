@@ -25,6 +25,7 @@ function createHtmlElements() {
     for(let i = 1; i <= size ** 2; i++) {
         const btn = document.createElement("button");
         btn.className = "item";
+        btn.setAttribute("draggable", "true");
         btn.style.width = `calc(100% / ${size})`;
         btn.style.height = `calc(100% / ${size})`;
         btn.dataset.matrixId = i;
