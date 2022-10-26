@@ -25,6 +25,7 @@ function createHtmlElements() {
     for(let i = 1; i <= size ** 2; i++) {
         const btn = document.createElement("button");
         btn.className = "item";
+        btn.setAttribute("draggable", "true");
         btn.style.width = `calc(100% / ${size})`;
         btn.style.height = `calc(100% / ${size})`;
         btn.dataset.matrixId = i;
@@ -88,19 +89,19 @@ function createHtmlElements() {
     stopBtn.innerHTML = "Stop";
     buttonContainer.append(stopBtn);
 
-    const saveBtn = document.createElement("button");
-    saveBtn.className = "button";
-    saveBtn.classList.add("btn");
-    saveBtn.id = "save";
-    saveBtn.innerHTML = "Save";
-    buttonContainer.append(saveBtn);
-
     const resultBtn = document.createElement("button");
     resultBtn.className = "button";
     resultBtn.classList.add("btn");
     resultBtn.id = "result";
-    resultBtn.innerHTML = "Result";
+    resultBtn.innerHTML = "Results";
     buttonContainer.append(resultBtn);
+
+    const soundBtn = document.createElement("button");
+    soundBtn.className = "button";
+    soundBtn.classList.add("btn");
+    soundBtn.id = "sound";
+    soundBtn.innerHTML = `<img class="btn-img" src="https://cdn-icons-png.flaticon.com/512/727/727240.png" alt="on">`;
+    buttonContainer.append(soundBtn);
 
     const sizeContainer = document.createElement("div");
     sizeContainer.className = "size-container";
@@ -165,9 +166,10 @@ const countItems = size ** 2;
 
 const shuffleBtn = document.getElementById("shuffle");
 const stopBtn = document.getElementById("stop");
-const saveBtn = document.getElementById("save");
+const soundBtn = document.getElementById("sound");
 const resultBtn = document.getElementById("result");
 
+const audio = document.getElementById("audio");
 const score = document.getElementById("score");
 let scoreNumber = Number(score.innerHTML);
 const time = document.getElementById("time");
@@ -187,7 +189,8 @@ if(itemNodes.length != countItems) {
     throw new Error(`'должно быть ровно ${countItems} элементов в HTML`);
 }
 
-itemNodes[countItems - 1].style.display = "none";
+const emptyItem = itemNodes[countItems - 1];
+emptyItem.style.display = "none";
 let matrix = getMatrix(
     itemNodes.map(item => Number(item.dataset.matrixId))
 );
@@ -227,8 +230,15 @@ containerNode.addEventListener("mouseup", (event) => {
     }
 })
 
-saveBtn.addEventListener("click", () => {
-    alert("Sorry, this function is not working now :( ");
+let x = false;
+soundBtn.addEventListener("click", () => {
+    if(song.volume == 0 || x == false) {
+        soundBtn.innerHTML = `<img class="btn-img" src="https://cdn-icons-png.flaticon.com/512/727/727269.png" alt="on">`;
+        x = true;
+    } else if(song.volume == 0.1 || x == true) {
+        soundBtn.innerHTML = `<img class="btn-img" src="https://cdn-icons-png.flaticon.com/512/727/727240.png" alt="off">`;
+        x = false;
+    }
 })
 
 /* helpers */
@@ -337,14 +347,12 @@ function changePosition(event) {
     const blankCoords = findCoordinatesByNumber(blankNumber, matrix);
     const isValid = isValidForSwap(buttonCoords, blankCoords);
 
-    if(shuffleBtn.hasAttribute("disabled") || !stopBtn.classList.contains("btn")) {
-        isValid = false;
-    }
-    
-    if(isValid) {
-        swap(blankCoords, buttonCoords, matrix);
-        moveTile();
-        setPositionItems(matrix);
+    if(shuffleBtn.classList.contains("btn")) {
+        if(isValid) {
+            swap(blankCoords, buttonCoords, matrix);
+            soundTile(x);
+            setPositionItems(matrix);
+        }
     }
 }
 
@@ -392,25 +400,32 @@ stopBtn.addEventListener("click", () => {
 function setDisabledStyle() {
     shuffleBtn.setAttribute("disabled", "disabled");
     shuffleBtn.classList.add("disabled");
+    shuffleBtn.classList.remove("btn");
     shuffleBtn.style.cursor = "auto";
-    for(let i = 0; i < itemNodes.length; i++) {
-        itemNodes[i].setAttribute("disabled", "disabled");
-        itemNodes[i].style.cursor = "auto";
+    for(let item of itemNodes) {
+        item.setAttribute("disabled", "disabled");
+        item.setAttribute("draggable", "false");
+        item.style.cursor = "auto";
     }
 }
 
 function removeDisabledStyle() {
     shuffleBtn.removeAttribute("disabled", "disabled");
     shuffleBtn.classList.remove("disabled");
+    shuffleBtn.classList.add("btn");
     shuffleBtn.style.cursor = "pointer";
-    for(let i = 0; i < itemNodes.length; i++) {
-        itemNodes[i].setAttribute("disabled", "disabled");
-        itemNodes[i].style.cursor = "pointer";
+    for(let item of itemNodes) {
+        item.setAttribute("disabled", "disabled");
+        item.setAttribute("draggable", "true");
+        item.style.cursor = "pointer";
     }
 }
 
-function moveTile() {
-    let song = document.getElementById("song");
-    song.volume = 0.1;
+function soundTile(boolean) {
+    if(boolean == true) {
+        song.volume = 0.1;
+    } else {
+        song.volume = 0;
+    }
     song.play();
 }
