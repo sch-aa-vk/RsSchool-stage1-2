@@ -1,6 +1,5 @@
 body,
 html {
-    height: 100%;
     font: 16px/1.4 Georgia, serif;
     background: url(https://images.unsplash.com/photo-1539622106114-e0df812097e6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80);
     background-size: cover;
@@ -67,6 +66,7 @@ p, a {
 }
 
 .button {
+    display: flex;
     color: black;
     background: #ADDFAD;
     font: 2rem/1.4 Georgia, serif;
@@ -111,6 +111,11 @@ p, a {
 
 .button.btn:active::before {
     transform: translate3d(-0.46em, -0.5em, -0.1em);
+}
+
+.btn-img {
+    width: 45px;
+    height: 45px;
 }
 
 .size-container {
