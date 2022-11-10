@@ -8,6 +8,8 @@ module.exports = {
   mode: "development",
   entry: {
     main: "./index.js",
+    heading: "./heading.js",
+    results: "./results.js"
   },
   output: {
     filename: "[name].[contenthash].js",
@@ -23,7 +25,22 @@ module.exports = {
   },
   plugins: [
     new HTMLWebpackPlugin({
-      template: "./index.html"
+      filename: "index.html",
+      template: "./index.html",
+      chunks: ["main"],
+      inject: "body"
+    }),
+    new HTMLWebpackPlugin({
+      filename: "heading.html",
+      template: "./heading.html",
+      chunks: ["heading"],
+      inject: "body"
+    }),
+    new HTMLWebpackPlugin({
+      filename: "results.html",
+      template: "./results.html",
+      chunks: ["results"],
+      inject: "body"
     }),
     new CleanWebpackPlugin()
   ],
