@@ -8,8 +8,8 @@ module.exports = {
   context: path.resolve(__dirname, "src"),
   mode: "development",
   entry: {
+    game: "./game.js",
     main: "./index.js",
-    heading: "./heading.js",
     results: "./results.js"
   },
   output: {
@@ -26,15 +26,15 @@ module.exports = {
   },
   plugins: [
     new HTMLWebpackPlugin({
-      filename: "index.html",
-      template: "./index.html",
-      chunks: ["main"],
+      filename: "game.html",
+      template: "./game.html",
+      chunks: ["game"],
       inject: "body"
     }),
     new HTMLWebpackPlugin({
-      filename: "heading.html",
-      template: "./heading.html",
-      chunks: ["heading"],
+      filename: "index.html",
+      template: "./index.html",
+      chunks: ["main"],
       inject: "body"
     }),
     new HTMLWebpackPlugin({
