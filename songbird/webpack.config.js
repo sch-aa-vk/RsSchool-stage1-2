@@ -1,6 +1,7 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+const ghpages = require('gh-pages');
 // const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
