@@ -114,8 +114,15 @@
 }
 
 .frame__form-input {
+  -webkit-appearance: none;
   width: 2vw;
   height: 2vw;
+  border-radius: 50%;
+  border: 1px solid #26495d;
+  background-color: #e5e8ef;
+  &:checked {
+    -webkit-appearance: none;
+  }
 }
 
 .frame__description {

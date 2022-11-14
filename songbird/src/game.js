@@ -1,24 +1,27 @@
 import "./styles/index.css";
 import {birdsData} from "./data.js";
 
-const question = document.querySelector(".h2_description");
-const img = document.querySelector(".img_bird");
-const audioControls = document.querySelector(".audio_description");
-const audio = document.querySelector(".frame__audio");
-const description = document.querySelector(".p_description");
-const species = document.querySelector(".p_species");
+let question;
+let img;
+let audioControls;
+let audio;
+let description;
+let species;
 const score = document.querySelector(".p_score");
-const answerCollection = Array.from(document.querySelectorAll(".frame__form-label"));
+let answerCollection;
 const levelBtn = document.querySelector(".frame__button");
-const navImg = document.querySelector(".img_nav");
-const navTitle = document.querySelector(".h2_nav");
-const toolbar = Array.from(document.querySelectorAll(".li_toolbar"));
+let navImg;
+let navTitle;
+let toolbar;
+let checkboxCollection;
+const time = document.querySelector(".time");
+const btnPlay = document.querySelector(".play");
+const btnPause = document.querySelector(".pause");
 
 let l = 0;
-let s = 5;
-let count = 0;
+let s;
 
-document.addEventListener("load", game(l, s));
+game(l, s);
 levelBtn.addEventListener("click", () => {
   removeStyle();
   game(++l);
@@ -28,16 +31,24 @@ levelBtn.addEventListener("click", () => {
       element.classList.add("active");
     }
   })
-  count = +score.textContent;
-  s = 5 + l;
 })
 
 function game(l) {
+  navTitle = document.querySelector(".h2_nav");
+  navImg = document.querySelector(".img_nav");
+  question = document.querySelector(".h2_description");
+  img = document.querySelector(".img_bird");
+  audioControls = document.querySelector(".audio_description");
+  audio = document.querySelector(".frame__audio");
+  description = document.querySelector(".p_description");
+  species = document.querySelector(".p_species");
+  answerCollection = Array.from(document.querySelectorAll(".frame__form-label"));
+  toolbar = Array.from(document.querySelectorAll(".li_toolbar"));
   let n = Math.round(Math.random() * 6);
-  audio.setAttribute("src", birdsData[l][n].audio);
+  audio.setAttribute("src", birdsData[l][n]["audio"]);
   let i = 0;
   answerCollection.forEach(element => {
-    element.innerHTML = `<input class="frame__form-input" type="checkbox"> ${birdsData[l][i].name}`;
+    element.insertAdjacentText("beforeend", ` ${birdsData[l][i]["name"]}`);
     i++;
     element.addEventListener("click", () => {
       element.setAttribute("checked", "checked");
@@ -45,13 +56,14 @@ function game(l) {
     })
   })
   
-  console.log(birdsData[l][n].name);
+  console.log(birdsData[l][n]["name"]);
 }
 
 function removeStyle() {
   answerCollection.forEach(element => {
     element.style.pointerEvents = "all";
     element.removeAttribute("checked", "checked");
+    element.innerHTML = `<input type="checkbox" class="frame__form-input">`;
   })
   levelBtn.style.pointerEvents = "none";
   navImg.setAttribute("src", "https://img.icons8.com/color/512/toucan.png");
@@ -63,6 +75,8 @@ function removeStyle() {
   audioControls.removeAttribute("src");
   audioControls.style.display = "none";
   levelBtn.style.background = "#a2aeb5";
+  btnPlay.style.display = "block";
+  btnPause.style.display = "none";
 }
 
 function correctAns(index, l) {
@@ -76,32 +90,34 @@ function correctAns(index, l) {
 }
 
 function checkAnswer(element, n, l) {
+  checkboxCollection = Array.from(document.querySelectorAll(".frame__form-input"));
   let name = element.textContent.trim();
   let index;
   for(let i = 0; i < 6; i++) {
-    if(birdsData[l][i].name == name) {
+    if(birdsData[l][i]["name"] == name) {
       index = i;
     }
   }
-  if(name === birdsData[l][n].name) {
+  if(name === birdsData[l][n]["name"]) {
     correctAns(index, l);
-    score.textContent = `${count + s}`;
-  } else s -= 0.5;
-  
-  img.removeAttribute("src", birdsData[l][index].image);
-  img.setAttribute("src", birdsData[l][index].image);
-  question.textContent = `${birdsData[l][index].name}`;
-  species.textContent = `${birdsData[l][index].species}`;
-  description.textContent = `${birdsData[l][index].description}`;
+    checkboxCollection[index].style.background = "green";
+  } else {
+    checkboxCollection[index].style.background = "red";
+    checkboxCollection[index].style.pointerEvents = "none";
+  }
+
+  checkboxCollection[index].style.pointerEvents = "none";
+  img.setAttribute("src", birdsData[l][index]["image"]);
+  question.textContent = `${birdsData[l][index]["name"]}`;
+  species.textContent = `${birdsData[l][index]["species"]}`;
+  description.textContent = `${birdsData[l][index]["description"]}`;
   audioControls.style.display = "block";
-  audioControls.removeAttribute("src", birdsData[l][index].audio);
-  audioControls.setAttribute("src", birdsData[l][index].audio);
+  audioControls.setAttribute("src", birdsData[l][index]["audio"]);
 }
 
 function navQuestions(index, l) {
-  navImg.removeAttribute("src", birdsData[l][index].image);
-  navImg.setAttribute("src", birdsData[l][index].image);
-  navTitle.textContent = `${birdsData[l][index].name}`;
+  navImg.setAttribute("src", birdsData[l][index]["image"]);
+  navTitle.textContent = `${birdsData[l][index]["name"]}`;
 }
 
 function lastQuestion() {
@@ -109,11 +125,6 @@ function lastQuestion() {
     window.location.href = "./results.html";
   }
 }
-
-
-const time = document.querySelector(".time");
-const btnPlay = document.querySelector(".play");
-const btnPause = document.querySelector(".pause");
 
 btnPlay.addEventListener("click", () => {
   audio.play();
