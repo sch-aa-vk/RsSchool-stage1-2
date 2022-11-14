@@ -1,4 +1,4 @@
-const birdsData = [
+export const birdsData = [
   [       
     {
       id: 1,
@@ -300,5 +300,3 @@ const birdsData = [
     }
   ]
 ];
-
-export default birdsData;

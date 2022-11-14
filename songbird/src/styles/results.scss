@@ -1,1 +1,30 @@
 @import url(./heading.css);
+@import url(./results.css);
+
+.frame {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: start;
+  gap: 30px;
+}
+
+.frame__h2 {
+  font-size: 5vw;
+  padding: 2vw 0;
+}
+
+.frame__table {
+  border-collapse: collapse;
+}
+
+.frame__td {
+  padding: 0.5vw 2vw;
+  border: 0.5vw solid #e5e8ef;
+  width: 20vw;
+  height: 5vw;
+  text-align: center;
+  font-size: 4vw;
+  &:first-child {
+    width: 10vw;
+  }
+}

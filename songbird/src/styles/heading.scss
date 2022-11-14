@@ -7,6 +7,7 @@
   height: 100vh;
   width: 100vw;
   scroll-behavior: smooth;
+  user-select: none;
 }
 
 .header,
@@ -14,20 +15,31 @@
 {
   display: flex;
   justify-content: center;
-  height: 5%;
+  align-items: center;
+  height: 5vw;
   background: #3f798d;
+  overflow: hidden;
+}
+
+.header {
+  border-bottom: 1px solid #e5e8ef;
+}
+
+.footer {
+  border-top: 1px solid #e5e8ef;
+}
+
+.navigation__ul {
+  padding: 0 5px;
 }
 
 .navigation__li {
   float: left;
   list-style-type: none;
-  padding: (5% / 4) 20px;
-  border-right: 1px solid #e5e8ef;
+  padding: 5px 20px;
+  line-height: 5vw;
   transition: 0.5s;
   cursor: pointer;
-  &:first-child {
-    border-left: 1px solid #e5e8ef;
-  }
   &:hover {
     background: #3c657b;
   }
@@ -37,10 +49,11 @@
   display: block;
   color: #e5e8ef;
   text-decoration: none;
+  font-size: 2.5vw;
 }
 
 .main {
-  height: 90%;
+  height: 100vw;
   background: url(https://images.unsplash.com/photo-1548266652-99cf27701ced?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80) no-repeat center;
   background-size: cover;
 }
@@ -54,8 +67,8 @@
 }
 
 .frame {
-  width: 80%;
-  height: 80%;
+  width: 95%;
+  height: 95%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,4 +82,5 @@
   border: none;
   background: #a2aeb5;
   cursor: pointer;
+  font-size: 2vw;
 }
