@@ -21,8 +21,8 @@
     <div class="wrapper">
       <section class="frame">
         <section class="frame__questions">
-          <ul class="navigation__ul">
-            <li class="navigation__li li_toolbar active" data-question="0">разминка</li>
+          <ul class="navigation__ul questions_nav">
+            <li class="navigation__li li_toolbar" data-question="0">разминка</li>
             <li class="navigation__li li_toolbar" data-question="1">воробьиные</li>
             <li class="navigation__li li_toolbar" data-question="2">лесные</li>
             <li class="navigation__li li_toolbar" data-question="3">певчие</li>
@@ -31,57 +31,9 @@
           </ul>
           <p class="li_toolbar">Score: <span class="p_score">0</span></p>
         </section>
-        <section class="frame__question">
-          <div class="frame__img">
-            <img class="img_nav" src="https://img.icons8.com/color/512/toucan.png" alt="bird">
-          </div>
-          <h2 class="frame__h2 h2_nav">Угадай птицу</h2>
-          <audio src="" class="frame__audio" loop></audio>
-          <div class="controls">
-            <div class="play"><img src="https://img.icons8.com/office/512/play-button-circled.png" alt="play btn"></div>
-            <div class="pause"><img src="https://img.icons8.com/office/512/circled-pause.png" alt="pause btn"></div>
-            <span class="current-time">00:00</span>
-            <input type="range" class="audio-track" max="100" value="0">
-            <span class="duration">00:00</span>
-            <input type="range" class="volume-track" max="100" value="0">
-          </div>
-          <button class="frame__button">Next Level</button>
-        </section>
-        <section class="frame__answers">
-          <form action="" class="frame__form">
-            <label class="frame__form-label">
-              <input type="checkbox" class="frame__form-input">
-            </label>
-            <label class="frame__form-label">
-              <input type="checkbox" class="frame__form-input">
-            </label>
-            <label class="frame__form-label">
-              <input type="checkbox" class="frame__form-input">
-            </label>
-            <label class="frame__form-label">
-              <input type="checkbox" class="frame__form-input">
-            </label>
-            <label class="frame__form-label">
-              <input type="checkbox" class="frame__form-input">
-            </label>
-            <label class="frame__form-label">
-              <input type="checkbox" class="frame__form-input">
-            </label>
-          </form>
-        </section>
-        <section class="frame__description">
-          <div class="frame__description wrapper_description">
-            <div class="frame__img img_description">
-              <img class="frame__img img_bird" src="https://img.icons8.com/color/512/toucan.png" alt="black bird">
-            </div>
-            <div class="frame__title">
-              <h2 class="frame__h2 h2_description">****</h2>
-              <p class="frame__p p_species">****</p>
-            </div>
-          </div>
-          <audio class="frame__audio audio_description" src="" loop></audio>
-          <p class="frame__p p_description">****</p>
-        </section>
+        <section class="frame__question"></section>
+        <section class="frame__answers"></section>
+        <section class="frame__description"></section>
       </section>
     </div>
   </main>

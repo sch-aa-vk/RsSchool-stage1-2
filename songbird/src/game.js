@@ -1,140 +1,142 @@
 import "./styles/index.css";
 import {birdsData} from "./data.js";
 
-let question;
-let img;
-let audioControls;
-let audio;
-let description;
-let species;
-const score = document.querySelector(".p_score");
-let answerCollection;
-const levelBtn = document.querySelector(".frame__button");
-let navImg;
-let navTitle;
-let toolbar;
-let checkboxCollection;
-const time = document.querySelector(".time");
-const btnPlay = document.querySelector(".play");
-const btnPause = document.querySelector(".pause");
+const sectionQuestion = document.querySelector(".frame__question");
+const sectionAnswers = document.querySelector(".frame__answers");
+const sectionDescription = document.querySelector(".frame__description"); 
+const navigation = document.querySelector(".questions_nav");
 
-let l = 0;
-let s;
+let count = 5;
+let q = Math.round(Math.random() * birdsData.length);
+let index = 0;
 
-game(l, s);
-levelBtn.addEventListener("click", () => {
-  removeStyle();
-  game(++l);
-  toolbar.forEach(element => {
+function createQuestion() {
+  const question = document.createElement("div");
+  const imgQuestion = document.createElement("img");
+  const containerQuestion = document.createElement("div");
+  const titleQuestion = document.createElement("h2");
+  const audioQuestion = document.createElement("audio");
+  const buttonNext = document.createElement("button");
+
+  question.classList.add("question_wrapper");
+  buttonNext.classList.add("btn-next");
+
+  question.append(imgQuestion);
+  question.append(containerQuestion);
+  containerQuestion.append(titleQuestion);
+  containerQuestion.append(audioQuestion);
+  containerQuestion.append(buttonNext);
+  sectionQuestion.append(question);
+
+  titleQuestion.textContent = "Угадай птицу";
+
+  imgQuestion.setAttribute("src", "https://www.kindpng.com/picc/m/1-12754_bird-flight-bird-flight-silhouette-clip-art-black.png");
+  imgQuestion.setAttribute("alt", "question image");
+
+  audioQuestion.setAttribute("src", `${birdsData[index][q].audio}`);
+  audioQuestion.setAttribute("controls", "");
+
+  buttonNext.textContent = "Next Question";
+
+  const arr = Array.from(navigation.querySelectorAll("li"));
+  arr.forEach(element => {
     element.classList.remove("active");
-    if(element.dataset.question == l) {
-      element.classList.add("active");
-    }
+    if(arr.indexOf(element) == index) element.classList.add("active");
   })
-})
+}
 
-function game(l) {
-  navTitle = document.querySelector(".h2_nav");
-  navImg = document.querySelector(".img_nav");
-  question = document.querySelector(".h2_description");
-  img = document.querySelector(".img_bird");
-  audioControls = document.querySelector(".audio_description");
-  audio = document.querySelector(".frame__audio");
-  description = document.querySelector(".p_description");
-  species = document.querySelector(".p_species");
-  answerCollection = Array.from(document.querySelectorAll(".frame__form-label"));
-  toolbar = Array.from(document.querySelectorAll(".li_toolbar"));
-  let n = Math.round(Math.random() * 6);
-  audio.setAttribute("src", birdsData[l][n]["audio"]);
-  let i = 0;
-  answerCollection.forEach(element => {
-    element.insertAdjacentText("beforeend", ` ${birdsData[l][i]["name"]}`);
-    i++;
-    element.addEventListener("click", () => {
-      element.setAttribute("checked", "checked");
-      checkAnswer(element, n, l);
-    })
+function createAnswers() {
+  const arr = Array.from(birdsData[index]);
+  arr.forEach(element => {
+    arr[arr.indexOf(element)] = element.name;
   })
+
+  const answerContainer = document.createElement("ul");
   
-  console.log(birdsData[l][n]["name"]);
-}
+  for(let i = 0; i < arr.length; i++) {
+    let answer = document.createElement("li");
+    answer.textContent = arr[i];
+    answerContainer.append(answer);
+    answer.addEventListener("click", () => {
+      answer.style.background =  (answer.textContent == birdsData[index][q].name) ? "green" : "red";
 
-function removeStyle() {
-  answerCollection.forEach(element => {
-    element.style.pointerEvents = "all";
-    element.removeAttribute("checked", "checked");
-    element.innerHTML = `<input type="checkbox" class="frame__form-input">`;
-  })
-  levelBtn.style.pointerEvents = "none";
-  navImg.setAttribute("src", "https://img.icons8.com/color/512/toucan.png");
-  navTitle.textContent = `Угадай птицу`;
-  img.setAttribute("src", "https://img.icons8.com/color/512/toucan.png");
-  question.textContent = `****`;
-  species.textContent = `****`;
-  description.textContent = `****`;
-  audioControls.removeAttribute("src");
-  audioControls.style.display = "none";
-  levelBtn.style.background = "#a2aeb5";
-  btnPlay.style.display = "block";
-  btnPause.style.display = "none";
-}
+      if(answer.style.background == "green") {
+        const block = document.createElement("div");
+        block.style.position = "absolute";
+        block.style.width = `${sectionAnswers.getBoundingClientRect().width}px`;
+        block.style.height = `${sectionAnswers.getBoundingClientRect().height}px`;
+        block.style.zIndex = "99";
+        sectionAnswers.append(block);
+        const score = document.querySelector(".p_score");
+        score.textContent = `${+score.textContent + count}`;
 
-function correctAns(index, l) {
-  answerCollection.forEach(element => {
-    element.style.pointerEvents = "none";
-  })
-  levelBtn.style.pointerEvents = "all";
-  navQuestions(index, l);
-  levelBtn.style.background = "green";
-  lastQuestion();
-}
+        const nextBtn = document.querySelector(".btn-next");
+        nextBtn.style.background = "green";
+        nextBtn.addEventListener("click", () => {
+          startGame(++index);
+        })
+      } else {
+        if(answer.style.pointerEvents != "none") count--;
+        answer.style.pointerEvents = "none";
+      }
 
-function checkAnswer(element, n, l) {
-  checkboxCollection = Array.from(document.querySelectorAll(".frame__form-input"));
-  let name = element.textContent.trim();
-  let index;
-  for(let i = 0; i < 6; i++) {
-    if(birdsData[l][i]["name"] == name) {
-      index = i;
-    }
-  }
-  if(name === birdsData[l][n]["name"]) {
-    correctAns(index, l);
-    checkboxCollection[index].style.background = "green";
-  } else {
-    checkboxCollection[index].style.background = "red";
-    checkboxCollection[index].style.pointerEvents = "none";
+      const description = document.querySelector(".frame__description");
+      description.textContent = "";
+      console.log(i);
+      createDescription(i);
+    });
   }
 
-  checkboxCollection[index].style.pointerEvents = "none";
-  img.setAttribute("src", birdsData[l][index]["image"]);
-  question.textContent = `${birdsData[l][index]["name"]}`;
-  species.textContent = `${birdsData[l][index]["species"]}`;
-  description.textContent = `${birdsData[l][index]["description"]}`;
-  audioControls.style.display = "block";
-  audioControls.setAttribute("src", birdsData[l][index]["audio"]);
+  sectionAnswers.append(answerContainer);
 }
 
-function navQuestions(index, l) {
-  navImg.setAttribute("src", birdsData[l][index]["image"]);
-  navTitle.textContent = `${birdsData[l][index]["name"]}`;
+function createDescription(e) {
+  const description = document.createElement("div");
+  const descriptionContainer = document.createElement("div");
+  const imgDesciption = document.createElement("img");
+  const titleDesciption = document.createElement("h2");
+  const speciesDesciption = document.createElement("p");
+  const audioDesciption = document.createElement("audio");
+  const textContainer = document.createElement("div");
+  const textDescription = document.createElement("p");
+
+  description.classList.add("desciption_wrapper");
+
+  descriptionContainer.append(imgDesciption);
+  textContainer.append(titleDesciption);
+  textContainer.append(speciesDesciption);
+  textContainer.append(audioDesciption);
+  description.append(descriptionContainer);
+  descriptionContainer.append(textContainer);
+  description.append(textDescription);
+  sectionDescription.append(description);
+
+  titleDesciption.textContent = "Угадай птицу";
+
+  imgDesciption.setAttribute("src", `${birdsData[index][e].image}`);
+  imgDesciption.setAttribute("alt", "question image");
+
+  audioDesciption.setAttribute("src", `${birdsData[index][e].audio}`);
+  audioDesciption.setAttribute("controls", "");
+
+  textDescription.textContent = birdsData[index][e].description;
+
+  speciesDesciption.textContent = birdsData[index][e].species;
 }
 
-function lastQuestion() {
-  if(toolbar[5].classList.contains("active")) {
-    window.location.href = "./results.html";
-  }
+function startGame(index) {
+  const question = document.querySelector(".frame__question");
+  const answers = document.querySelector(".frame__answers");
+  const description = document.querySelector(".frame__description");
+  question.textContent = "";
+  answers.textContent = "";
+  description.textContent = "";
+
+  q = Math.round(Math.random() * birdsData.length);
+  createQuestion();
+  createAnswers();
 }
 
-btnPlay.addEventListener("click", () => {
-  audio.play();
-
-  btnPause.style.display = "block";
-  btnPlay.style.display = "none";
-})
-
-btnPause.addEventListener("click", () => {
-  audio.pause();
-  btnPlay.style.display = "block";
-  btnPause.style.display = "none";
+window.addEventListener("load", () => {
+  startGame(index);
 })

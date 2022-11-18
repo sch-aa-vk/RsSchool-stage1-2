@@ -4,7 +4,9 @@
 }
 
 .body {
-  height: 100vh;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   width: 100vw;
   scroll-behavior: smooth;
   -webkit-user-select: none;
@@ -55,13 +57,14 @@
 }
 
 .main {
-  height: 100vw;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   background: url(https://images.unsplash.com/photo-1548266652-99cf27701ced?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80) no-repeat center;
   background-size: cover;
 }
 
 .wrapper {
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,9 +73,10 @@
 
 .frame {
   width: 95%;
-  height: 95%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
   display: flex;
-  align-items: center;
   justify-content: center;
   border-radius: 5px;
   background: #3f798d;
