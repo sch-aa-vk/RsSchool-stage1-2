@@ -1,6 +1,11 @@
 @import url(./heading.css);
 
+.wrapper {
+  min-height: max-content;
+}
+
 .frame {
+  min-height: max-content;
   margin: 2% 0;
   padding: 2%;
   display: flex;
@@ -32,21 +37,22 @@
 
 .frame__question {
   max-height: calc(400 * 100vw / 1920);
+  min-width: 100%;
 
   .question_wrapper {
-    width: 100%;
-    height: inherit;
+    max-height: inherit;
     display: flex;
     flex-flow: row wrap;
     gap: 1%;
     background: #e5e8ef;
     border: 2px black solid;
+    overflow: hidden;
   
     div {
       padding: 1%;
       display: flex;
       flex-flow: column wrap;
-      gap: 20px;
+      gap: 2.5%;
       width: max-content;
   
       h2 {
@@ -55,11 +61,13 @@
   
       audio {
         width: calc(100vw * 0.6);
+        height: 20%;
       }
 
       button {
         align-self: flex-end;
-        width: 200px;
+        width: calc(300 * 100vw / 1920);
+        height: calc(80 * 100vw / 1920);
         font-size: 2vw;
         background-color: #d7dae0;
         border: none;
@@ -71,8 +79,7 @@
   
     img {
       width: calc(498 * 100vw / 1920);
-      min-height: calc(332 * 100vw / 1920);
-      border: 1px solid black;
+      max-height: calc(200 * 100vw / 400);
     }
   }
 }
@@ -92,12 +99,34 @@
     min-height: max-content;
     padding-top: 0;
   }
+
   li {
     font-size: 4vw;
     padding: 2vw;
     background-color: #d7dae0;
     border: 2px solid #000000;
     border-top: none;
+
+    a {
+      position: relative;
+
+      &::before {
+        position: absolute;
+        top: -15px;
+        left: -50px;
+        display: list-item;
+        content: "⚬";
+        color: black;
+      }
+
+      &.red::before {
+        color: red;
+      }
+
+      &.green::before {
+        color: green;
+      }
+    }
 
     &:first-child {
       border-top: 2px solid #000000;
@@ -107,7 +136,6 @@
 
 .desciption_wrapper {
   padding: 2vw 0;
-  width: 100%;
   height: max-content;
   background: #e5e8ef;
   display: flex;
@@ -133,7 +161,7 @@
       display: flex;
       flex-flow: column wrap;
       justify-content: start;
-      gap: 1%;
+      gap: 3%;
   
       h2 {
         font-size: 5vw;
@@ -144,7 +172,8 @@
       }
   
       audio {
-        width: calc(100vw * 0.6);
+        width: calc(100vw * 0.4);
+        height: 40%;
       }
     }
   }

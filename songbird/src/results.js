@@ -1,30 +1,29 @@
 import "./styles/results.css";
-// import * as game from "./game.js";
 
-let result = "--";
-// let name = prompt("you're name?", "");
 const tbody = document.querySelector(".frame__tbody");
 const tr = document.createElement("tr");
 tr.classList.add("frame__tr");
 
-for(let i = 0; i < 3; i++) {
+let name = localStorage.getItem(`name`);
+let score = localStorage.getItem(`score`);
+
+for(let j = 0; j < 3; j++) {
   const td = document.createElement("td");
   td.classList.add("frame__td");
-  switch(i) {
+  switch(j) {
     case 0:
       td.textContent = 1;
       break;
     case 1:
-      td.textContent = "--";
+      td.innerHTML = name;
       break;
     case 2:
-      td.textContent = result;
+      td.innerHTML = score;
       break;
     default:
-      td.textContent = "";
+      td.innerHTML = "";
       break;
   }
   tr.append(td);
+  tbody.append(tr);
 }
-
-tbody.append(tr);

@@ -9,6 +9,8 @@ const navigation = document.querySelector(".questions_nav");
 let count = 5;
 let q = Math.round(Math.random() * birdsData.length);
 let index = 0;
+let data = "";
+let name = "";
 
 function createQuestion() {
   const question = document.createElement("div");
@@ -20,6 +22,8 @@ function createQuestion() {
 
   question.classList.add("question_wrapper");
   buttonNext.classList.add("btn-next");
+  imgQuestion.classList.add("question-image");
+  titleQuestion.classList.add("question-title");
 
   question.append(imgQuestion);
   question.append(containerQuestion);
@@ -54,35 +58,50 @@ function createAnswers() {
   const answerContainer = document.createElement("ul");
   
   for(let i = 0; i < arr.length; i++) {
-    let answer = document.createElement("li");
+    let answerLI = document.createElement("li");
+    let answer = document.createElement("a");
     answer.textContent = arr[i];
-    answerContainer.append(answer);
+    answerLI.append(answer);
+    answerContainer.append(answerLI);
     answer.addEventListener("click", () => {
-      answer.style.background =  (answer.textContent == birdsData[index][q].name) ? "green" : "red";
+      let add = (answer.textContent == birdsData[index][q].name) ? "green" : "red";
+      answer.classList.add(add);
+      answer.style.color = add;
 
-      if(answer.style.background == "green") {
-        const block = document.createElement("div");
-        block.style.position = "absolute";
-        block.style.width = `${sectionAnswers.getBoundingClientRect().width}px`;
-        block.style.height = `${sectionAnswers.getBoundingClientRect().height}px`;
-        block.style.zIndex = "99";
-        sectionAnswers.append(block);
+      if(answer.classList.contains("green")) {
         const score = document.querySelector(".p_score");
-        score.textContent = `${+score.textContent + count}`;
+        if(!answer.hasAttribute("disabled", "disabled")) score.textContent = `${+score.textContent + count}`;
+        answer.setAttribute("disabled", "disabled");
+        count = 5;
 
         const nextBtn = document.querySelector(".btn-next");
         nextBtn.style.background = "green";
         nextBtn.addEventListener("click", () => {
           startGame(++index);
         })
+
+        const img = document.querySelector(".question-image");
+        const title = document.querySelector(".question-title");
+
+        title.innerHTML = `Ответ: ${birdsData[index][q].name}`;
+        img.setAttribute("src", `${birdsData[index][q].image}`);
+
+        if(index == 5) {
+          setTimeout(() => {
+            name = prompt("Введите ваше имя!", "");
+            data = document.querySelector(".p_score").textContent;
+            localStorage.setItem(`name`, name);
+            localStorage.setItem(`score`, data);
+            window.location.href = "./results.html";
+          }, 1000);
+        }
       } else {
-        if(answer.style.pointerEvents != "none") count--;
-        answer.style.pointerEvents = "none";
+        if(!answer.hasAttribute("disabled", "disabled")) count--;
+        answer.setAttribute("disabled", "disabled");
       }
 
       const description = document.querySelector(".frame__description");
       description.textContent = "";
-      console.log(i);
       createDescription(i);
     });
   }
@@ -111,7 +130,7 @@ function createDescription(e) {
   description.append(textDescription);
   sectionDescription.append(description);
 
-  titleDesciption.textContent = "Угадай птицу";
+  titleDesciption.textContent = `${birdsData[index][e].name}`;
 
   imgDesciption.setAttribute("src", `${birdsData[index][e].image}`);
   imgDesciption.setAttribute("alt", "question image");
@@ -135,6 +154,19 @@ function startGame(index) {
   q = Math.round(Math.random() * birdsData.length);
   createQuestion();
   createAnswers();
+  createDescription1();
+}
+
+function createDescription1() {
+  const description = document.createElement("div");
+  const textDescription = document.createElement("p");
+
+  description.classList.add("desciption_wrapper");
+
+  description.append(textDescription);
+  sectionDescription.append(description);
+
+  textDescription.textContent = "выберите вариант ответа чтобы узнать правильный ли это ответ";
 }
 
 window.addEventListener("load", () => {

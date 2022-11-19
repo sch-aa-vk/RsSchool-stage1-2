@@ -1,5 +1,15 @@
+@charset "UTF-8";
 @import url(./heading.css);
+.wrapper {
+  min-height: -webkit-max-content;
+  min-height: -moz-max-content;
+  min-height: max-content;
+}
+
 .frame {
+  min-height: -webkit-max-content;
+  min-height: -moz-max-content;
+  min-height: max-content;
   margin: 2% 0;
   padding: 2%;
   display: flex;
@@ -31,21 +41,22 @@
 
 .frame__question {
   max-height: 20.8333333333vw;
+  min-width: 100%;
 }
 .frame__question .question_wrapper {
-  width: 100%;
-  height: inherit;
+  max-height: inherit;
   display: flex;
   flex-flow: row wrap;
   gap: 1%;
   background: #e5e8ef;
   border: 2px black solid;
+  overflow: hidden;
 }
 .frame__question .question_wrapper div {
   padding: 1%;
   display: flex;
   flex-flow: column wrap;
-  gap: 20px;
+  gap: 2.5%;
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
@@ -55,10 +66,12 @@
 }
 .frame__question .question_wrapper div audio {
   width: 60vw;
+  height: 20%;
 }
 .frame__question .question_wrapper div button {
   align-self: flex-end;
-  width: 200px;
+  width: 15.625vw;
+  height: 4.1666666667vw;
   font-size: 2vw;
   background-color: #d7dae0;
   border: none;
@@ -68,8 +81,7 @@
 }
 .frame__question .question_wrapper img {
   width: 25.9375vw;
-  min-height: 17.2916666667vw;
-  border: 1px solid black;
+  max-height: 50vw;
 }
 
 .frame__answers {
@@ -96,13 +108,29 @@
   border: 2px solid #000000;
   border-top: none;
 }
+.frame__answers li a {
+  position: relative;
+}
+.frame__answers li a::before {
+  position: absolute;
+  top: -15px;
+  left: -50px;
+  display: list-item;
+  content: "⚬";
+  color: black;
+}
+.frame__answers li a.red::before {
+  color: red;
+}
+.frame__answers li a.green::before {
+  color: green;
+}
 .frame__answers li:first-child {
   border-top: 2px solid #000000;
 }
 
 .desciption_wrapper {
   padding: 2vw 0;
-  width: 100%;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
@@ -128,7 +156,7 @@
   display: flex;
   flex-flow: column wrap;
   justify-content: start;
-  gap: 1%;
+  gap: 3%;
 }
 .desciption_wrapper div div h2 {
   font-size: 5vw;
@@ -137,5 +165,6 @@
   font-size: 2.5vw;
 }
 .desciption_wrapper div div audio {
-  width: 60vw;
+  width: 40vw;
+  height: 40%;
 }/*# sourceMappingURL=index.css.map */

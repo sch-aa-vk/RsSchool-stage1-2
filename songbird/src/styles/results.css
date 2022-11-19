@@ -4,7 +4,7 @@
   display: flex;
   flex-flow: column wrap;
   justify-content: start;
-  gap: 30px;
+  gap: 20px;
 }
 
 .frame__h2 {
@@ -13,6 +13,7 @@
 }
 
 .frame__table {
+  width: 95%;
   border-collapse: collapse;
 }
 
