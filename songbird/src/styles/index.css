@@ -110,11 +110,13 @@
 }
 .frame__answers li a {
   position: relative;
+  text-align: center;
 }
 .frame__answers li a::before {
   position: absolute;
-  top: -15px;
-  left: -50px;
+  align-self: center;
+  top: -0.8333333333vw;
+  left: -2.7777777778vw;
   display: list-item;
   content: "⚬";
   color: black;

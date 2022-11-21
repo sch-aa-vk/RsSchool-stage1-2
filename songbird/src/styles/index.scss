@@ -109,11 +109,13 @@
 
     a {
       position: relative;
+      text-align: center;
 
       &::before {
         position: absolute;
-        top: -15px;
-        left: -50px;
+        align-self: center;
+        top: calc(-3 * 100vw / 360);
+        left: calc(-10 * 100vw / 360);
         display: list-item;
         content: "⚬";
         color: black;

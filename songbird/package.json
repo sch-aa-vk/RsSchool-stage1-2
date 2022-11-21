@@ -10,7 +10,7 @@
     "start": "webpack-dev-server --mode development --open",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "homepage": "https://rolling-scopes-school.github.io/sch-aa-vk-JSFE2022Q3/"
+    "homepage": "https://rolling-scopes-school.github.io/sch-aa-vk-JSFE2022Q3/songbird"
   },
   "author": "Amina Senchenko <sch.aa.vk@gmail.com>",
   "license": "ISC",
