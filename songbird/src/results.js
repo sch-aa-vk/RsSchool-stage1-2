@@ -7,6 +7,8 @@ tr.classList.add("frame__tr");
 let name = localStorage.getItem(`name`);
 let score = localStorage.getItem(`score`);
 
+const winText = document.querySelector(".win_text");
+
 for(let j = 0; j < 3; j++) {
   const td = document.createElement("td");
   td.classList.add("frame__td");
@@ -27,3 +29,13 @@ for(let j = 0; j < 3; j++) {
   tr.append(td);
   tbody.append(tr);
 }
+
+if(score == 30) {
+  winText.style.display = "none";
+}
+
+const restartBtn = document.querySelector(".frame__button");
+
+restartBtn.addEventListener("click", () => {
+  window.location.href = "./game.html";
+})

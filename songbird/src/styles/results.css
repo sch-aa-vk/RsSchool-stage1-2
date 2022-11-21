@@ -1,6 +1,7 @@
 @import url(./heading.css);
-@import url(./results.css);
+@import url(./index.css);
 .frame {
+  min-height: 1000px;
   display: flex;
   flex-flow: column wrap;
   justify-content: start;
@@ -27,4 +28,21 @@
 }
 .frame__td:first-child {
   width: 10vw;
+}
+
+.frame__button {
+  width: 20vw;
+  height: 5vw;
+  margin-top: 20px;
+  background: #e5e8ef;
+  border-radius: 25px;
+}
+.frame__button:hover {
+  background: green;
+}
+
+.win_text {
+  display: none;
+  font-size: 5vw;
+  color: gold;
 }/*# sourceMappingURL=results.css.map */

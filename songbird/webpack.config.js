@@ -2,7 +2,6 @@ const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const ghpages = require('gh-pages');
-// const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   context: path.resolve(__dirname, "src"),
@@ -10,7 +9,8 @@ module.exports = {
   entry: {
     game: "./game.js",
     main: "./index.js",
-    results: "./results.js"
+    results: "./results.js",
+    gallery: "./gallery.js"
   },
   output: {
     filename: "[name].[contenthash].js",
@@ -41,6 +41,12 @@ module.exports = {
       filename: "results.html",
       template: "./results.html",
       chunks: ["results"],
+      inject: "body"
+    }),
+    new HTMLWebpackPlugin({
+      filename: "gallery.html",
+      template: "./gallery.html",
+      chunks: ["gallery"],
       inject: "body"
     }),
     new CleanWebpackPlugin()

@@ -1,0 +1,7 @@
+@import url(./heading.css);
+@import url(./index.css);
+.frame {
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}/*# sourceMappingURL=gallery.css.map */
