@@ -7,7 +7,7 @@ const sectionDescription = document.querySelector(".frame__description");
 const navigation = document.querySelector(".questions_nav");
 
 let count = 5;
-let q = Math.round(Math.random() * birdsData.length);
+let q = Math.round(Math.random() * 5);
 let index = 0;
 let data = "";
 let name = "";
@@ -63,6 +63,7 @@ function createAnswers() {
     answer.textContent = arr[i];
     answerLI.append(answer);
     answerContainer.append(answerLI);
+    answer.style.cursor = "pointer";
     answer.addEventListener("click", () => {
       let add = (answer.textContent == birdsData[index][q].name) ? "green" : "red";
       answer.classList.add(add);
