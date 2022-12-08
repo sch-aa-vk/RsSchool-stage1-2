@@ -8,6 +8,11 @@ export interface INewsAPI {
   content: string;
   status: string;
   totalResults: number;
+  id: string;
+  name: string;
+  category: string;
+  language: string;
+  country: string;
   source: {
     id: string;
     name: string;
