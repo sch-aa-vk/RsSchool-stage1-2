@@ -2,7 +2,7 @@ import './sources.css';
 import { INewsAPI } from '../../../types/index';
 
 export class Sources {
-    draw(data: INewsAPI[]) {
+    draw(data: INewsAPI['sources']) {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
 
