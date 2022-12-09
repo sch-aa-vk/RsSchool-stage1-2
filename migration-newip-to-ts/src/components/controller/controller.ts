@@ -1,7 +1,8 @@
+import { INewsAPI } from '../../types/index';
 import { AppLoader } from './appLoader';
 
 export class AppController extends AppLoader {
-    getSources(callback: () => void) {
+    getSources(callback: (data?: INewsAPI) => void) {
         super.getResp(
             {
                 endpoint: 'sources',
@@ -10,7 +11,7 @@ export class AppController extends AppLoader {
         );
     }
 
-    getNews(e: Event, callback: () => void) {
+    getNews(e: Event, callback: (data?: INewsAPI) => void) {
         let target = e.target as Element;
         const newsContainer = e.currentTarget as Element;
 
