@@ -18,5 +18,3 @@ export class Sources {
         (document.querySelector('.sources') as Element).append(fragment);
     }
 }
-
-export default Sources;

@@ -1,5 +1,5 @@
 import { INewsAPI } from '../../types/index';
-import AppController from '../controller/controller';
+import { AppController } from '../controller/controller';
 import { AppView } from '../view/appView';
 
 export class App {
@@ -18,5 +18,3 @@ export class App {
         this.controller.getSources((data) => this.view.drawSources(data as INewsAPI));
     }
 }
-
-export default App;

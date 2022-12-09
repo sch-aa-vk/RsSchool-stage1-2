@@ -45,5 +45,3 @@ export class Loader {
             .catch((err) => console.error(err));
     }
 }
-
-export default Loader;
