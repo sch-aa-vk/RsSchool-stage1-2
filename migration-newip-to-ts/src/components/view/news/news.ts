@@ -14,7 +14,7 @@ export class News {
             if (idx % 2) (newsClone.querySelector('.news__item') as Element).classList.add('alt');
 
             (newsClone.querySelector('.news__meta-photo') as HTMLElement).style.backgroundImage = `url(${
-                item.urlToImage || 'img/news_placeholder.jpg'
+                item.urlToImage || "https://t3.ftcdn.net/jpg/03/83/16/20/360_F_383162081_kCoJUSq3HyREDTwwIcDIfmgK2mbZb0FC.jpg"
             })`;
             (newsClone.querySelector('.news__meta-author') as Element).textContent = item.author || item.name;
             (newsClone.querySelector('.news__meta-date') as Element).textContent = item.publishedAt
