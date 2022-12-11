@@ -1,3 +1,19 @@
+html {
+    font-size: 16px;
+}
+
+@media screen and (max-width: 850px) {
+    html {
+        font-size: 8px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    html {
+        font-size: 5px;
+    }
+}
+
 body {
     color: #fff;
     background: #17181c;
@@ -5,22 +21,37 @@ body {
 }
 
 header {
-    padding: 10px 30px;
+    padding: 1rem 2rem;
 }
 
 header h1 {
-    font-size: 40px;
+    font-size: 5rem;
     font-weight: 800;
 }
 
 footer {
-    height: 100px;
+    height: 10rem;
+    margin-top: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 3rem;
 }
+
+.rsschool-logo {
+    width: 12rem;
+    height: 4rem;
+    filter: invert(70%);
+}
+
+.github-logo {
+    width: 4rem;
+    height: 4rem;
+    filter: invert(70%);
+}
+
 footer .copyright {
-    font-size: 14px;
+    font-size: 3rem;
     color: #333;
     text-align: center;
 }
