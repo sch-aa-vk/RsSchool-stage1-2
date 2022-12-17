@@ -1,3 +1,5 @@
+import { INewsAPI } from "../../types/index"; 
+
 export class Loader {
     baseLink: string;
     options: object;
@@ -37,7 +39,7 @@ export class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback: FunctionStringCallback, options = {}) {
+    load(method: string, endpoint: string, callback: (data?: INewsAPI) => void, options = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())

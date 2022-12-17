@@ -1,5 +1,4 @@
-import { INewsAPI } from '../../types/index';
-import { AppController } from '../controller/controller';
+import { AppController } from '../controller/controller'; 
 import { AppView } from '../view/appView';
 
 export class App {
@@ -14,7 +13,13 @@ export class App {
     start() {
         (document
             .querySelector('.sources') as Element)
-            .addEventListener('click', (e) => this.controller.getNews(e, (data) => this.view.drawNews(data as INewsAPI)));
-        this.controller.getSources((data) => this.view.drawSources(data as INewsAPI));
+            .addEventListener('click', (e) => this.controller.getNews(e, (data) => {
+                if (!data) return;
+                this.view.drawNews(data);
+            }));
+        this.controller.getSources((data) => {
+            if (!data) return;
+            this.view.drawSources(data);
+        });
     }
 }
