@@ -1,0 +1,10 @@
+.button-element {
+  width: max-content;
+  height: max-content;
+  padding: 8px;
+  background: none;
+  border: 2px solid #000;
+  font-size: 24px;
+  box-sizing: border-box;
+  text-transform: uppercase;
+}

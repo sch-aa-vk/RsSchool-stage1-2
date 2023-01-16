@@ -1,0 +1,6 @@
+.container-hr {
+  width: max-content;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 20px;
+}
