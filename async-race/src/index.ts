@@ -1,5 +1,5 @@
 import { Button } from "./components/button/index";
-import { ContainerHr } from "./components/container-hr/index";
+import { Container } from "./components/container/index";
 import { clear } from "./functions/clear/index";
 import { Garage } from "./layouts/garage/index";
 import { Winners } from "./layouts/winners/index";
@@ -16,6 +16,6 @@ const winnersBtn = Button('to winners', () => {
   clear();
   body.append(Winners());
 })
-const container = ContainerHr([garageBtn, winnersBtn]);
+const container = Container([garageBtn, winnersBtn], 'row wrap');
 
 body.append(container);

@@ -1,8 +1,9 @@
 import './style.css';
 
-export const ContainerHr = (comp: HTMLElement[]) => {
+export const Container = (comp: HTMLElement[], flow: string) => {
   const block = document.createElement('div');
-  block.className = 'container-hr';
+  block.className = 'container';
+  block.style.flexFlow = flow;
   block.append(...comp);
   console.log(comp);
 

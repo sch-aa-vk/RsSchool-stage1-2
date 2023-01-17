@@ -1,7 +1,9 @@
 .garage {
-  display: flex;
-  flex-flow: column wrap;
-  gap: 80px;
+  gap: 40px;
+}
+
+.titles {
+  gap: 10px;
 }
 
 .heading {
@@ -9,7 +11,5 @@
 }
 
 .cars-track {
-  display: flex;
-  flex-flow: column wrap;
   gap: 30px;
 }

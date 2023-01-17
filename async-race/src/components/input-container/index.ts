@@ -1,11 +1,9 @@
 
 import { Button } from '../button/index';
+import { Container } from '../container/index';
 import './style.css';
 
 export const InputContainer = (text: string) => {
-  const block = document.createElement('div');
-  block.className = 'input-container';
-
   const inputText = document.createElement('input');
   inputText.setAttribute('type', 'text');
   inputText.className = 'input-text';
@@ -17,7 +15,7 @@ export const InputContainer = (text: string) => {
 
   const button = Button(`${text}`, () => {});
 
-  block.append(inputText, inputColor, button);
+  const block = Container([inputText, inputColor, button], 'row wrap')
   
   return block;
 }

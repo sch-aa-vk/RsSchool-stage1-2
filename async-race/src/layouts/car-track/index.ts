@@ -1,6 +1,6 @@
 import { Button } from '../../components/button/index';
 import { Car } from '../../components/car/index';
-import { ContainerHr } from '../../components/container-hr/index';
+import { Container } from '../../components/container/index';
 import { ICar } from '../../interfaces/ICar';
 import './style.css';
 
@@ -12,12 +12,12 @@ export const CarTrack = (car: ICar) => {
   name.className = 'car-name';
   name.innerHTML = car.name;
 
-  const containerFirst = ContainerHr([selectBtn, removeBtn, name]);
+  const containerFirst = Container([selectBtn, removeBtn, name], 'row wrap');
 
   const startBtn = Button('a', () => {});
   const endBtn = Button('b', () => {});
 
-  const containerSecond = ContainerHr([startBtn, endBtn]);
+  const containerSecond = Container([startBtn, endBtn], 'row wrap');
   containerSecond.classList.add('second-block');
 
   const carFigure = Car(car.color);
@@ -28,12 +28,11 @@ export const CarTrack = (car: ICar) => {
   flag.className = 'flag';
 
   const blockBottom = document.createElement('div');
-  blockBottom.className = 'bottom-block';
+  blockBottom.classList.add('bottom-block');
   blockBottom.append(containerSecond, carFigure, flag);
   
-  const block = document.createElement('div');
-  block.className = 'overall-block';
-  block.append(containerFirst, blockBottom);
+  const block = Container([containerFirst, blockBottom], 'column wrap')
+  block.classList.add('overall-block');
 
   return block;
 }

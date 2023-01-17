@@ -1,14 +1,14 @@
 .overall-block {
   width: 100%;
-  height: 100px;
-  display: flex;
-  flex-flow: column wrap;
+  height: 110px;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
 .bottom-block {
   position: relative;
   height: 50px;
+  width: calc(100vw - 40px);
   border-bottom: 2px dotted #fff;
 }
 

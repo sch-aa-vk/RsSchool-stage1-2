@@ -1,5 +1,5 @@
 import { Button } from '../../components/button/index';
-import { ContainerHr } from '../../components/container-hr/index';
+import { Container } from '../../components/container/index';
 import { InputContainer } from '../../components/input-container/index';
 import './style.css';
 
@@ -14,7 +14,7 @@ export const Form = () => {
   const buttonReset = Button('reset', () => {});
   const buttonGenCars = Button('generate cars', () => {});
 
-  const block = ContainerHr([buttonRace, buttonReset, buttonGenCars]);
+  const block = Container([buttonRace, buttonReset, buttonGenCars], 'row wrap');
 
   form.append(lineCreate, lineUpdate, block);
 
