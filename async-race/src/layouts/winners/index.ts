@@ -1,5 +1,4 @@
 import { IWinners } from '../../interfaces/IWinners';
-import { CreateCar } from '../form/index';
 
 import './style.css';
 
@@ -9,13 +8,11 @@ fetch('http://localhost:3000/winners')
 .then(responce => responce.json())
 .then(responce => Object.assign(winners, responce));
 
-export const Table = () => {
+export const Winners = () => {
+  const block = document.createElement('div');
+  block.className = 'winners';
 
-  const element = document.querySelector('.form') as HTMLFormElement;
+  block.append('fff');
 
-  if (element) {
-    element.remove();
-  }
-
-  document.body.append(CreateCar());
+  return block;
 }

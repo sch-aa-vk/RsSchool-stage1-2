@@ -17,5 +17,6 @@ export const CreateCar = () => {
   const block = ContainerHr([buttonRace, buttonReset, buttonGenCars]);
 
   form.append(lineCreate, lineUpdate, block);
+
   return form;
 }

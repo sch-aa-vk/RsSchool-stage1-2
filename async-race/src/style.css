@@ -2,3 +2,10 @@
   margin: 0;
   padding: 0;
 }
+
+body {
+  padding: 20px;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 50px;
+}
