@@ -1,0 +1,47 @@
+.overall-block {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+}
+
+.bottom-block {
+  position: relative;
+  height: 50px;
+  border-bottom: 2px dotted #fff;
+}
+
+.second-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  gap: 10px;
+}
+
+.second-block > button {
+  background: none;
+  border: 2px solid green;
+  color: green;
+}
+
+.car {
+  position: absolute;
+  bottom: 0;
+}
+
+.flag {
+  position: absolute;
+  bottom: 0;
+  right: 60px;
+  height: 40px;
+  width: 40px;
+  background: url(https://www.pngkey.com/png/full/233-2333785_black-flag-icon-red-flag-icon-png.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.car-name {
+  font-size: 20px;
+  color: rgb(186, 186, 36);
+}

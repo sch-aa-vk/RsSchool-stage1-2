@@ -7,3 +7,9 @@
 .heading {
   color: aliceblue;
 }
+
+.cars-track {
+  display: flex;
+  flex-flow: column wrap;
+  gap: 30px;
+}
