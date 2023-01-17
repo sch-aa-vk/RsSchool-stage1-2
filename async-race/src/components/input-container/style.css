@@ -1,0 +1,25 @@
+.input-container {
+  width: max-content;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 20px;
+}
+
+.input-text {
+  width: 200px;
+  height: 40px;
+  background: #fff;
+  border: 2px solid #000;
+  padding: 8px;
+  box-sizing: border-box;
+  font-size: 24px;
+}
+
+.input-color {
+  width: 50px;
+  height: 40px;
+  border: 2px solid #000;
+  padding: 1px 3px;
+  box-sizing: border-box;
+  cursor: pointer;
+}

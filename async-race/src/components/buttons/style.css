@@ -7,4 +7,10 @@
   font-size: 24px;
   box-sizing: border-box;
   text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+.button-element:hover {
+  background: green;
 }
