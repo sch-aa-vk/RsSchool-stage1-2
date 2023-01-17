@@ -1,4 +1,4 @@
-import { Button } from "./components/buttons/index";
+import { Button } from "./components/button/index";
 import { ContainerHr } from "./components/container-hr/index";
 import { clear } from "./functions/clear/index";
 import { Garage } from "./layouts/garage/index";

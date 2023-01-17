@@ -1,9 +1,9 @@
-import { Button } from '../../components/buttons/index';
+import { Button } from '../../components/button/index';
 import { ContainerHr } from '../../components/container-hr/index';
 import { InputContainer } from '../../components/input-container/index';
 import './style.css';
 
-export const CreateCar = () => {
+export const Form = () => {
   const form = document.createElement('form');
   form.className = 'form';
 

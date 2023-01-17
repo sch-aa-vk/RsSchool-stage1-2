@@ -1,5 +1,5 @@
 
-import { Button } from '../buttons/index';
+import { Button } from '../button/index';
 import './style.css';
 
 export const InputContainer = (text: string) => {

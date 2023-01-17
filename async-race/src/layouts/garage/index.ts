@@ -1,12 +1,10 @@
-import { CreateCar } from '../form/index';
+import { getCars } from '../../functions/getCar/index';
+import { Form } from '../form/index';
 
 import './style.css';
 
 const garage: Array<Object> = [];
-
-fetch('http://localhost:3000/garage')
-.then(responce => responce.json())
-.then(responce => Object.assign(garage, responce));
+getCars().then(responce => Object.assign(garage, responce));
 
 export const Garage = () => {
   
@@ -17,7 +15,7 @@ export const Garage = () => {
   title.className = 'heading';
   title.textContent = `Garage (${garage.length})`;
 
-  block.append(CreateCar(), title);
+  block.append(Form(), title);
 
   return block;
 }
