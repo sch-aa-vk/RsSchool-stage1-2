@@ -1,0 +1,9 @@
+.garage {
+  display: flex;
+  flex-flow: column wrap;
+  gap: 80px;
+}
+
+.heading {
+  color: aliceblue;
+}

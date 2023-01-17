@@ -12,7 +12,11 @@ export const Winners = () => {
   const block = document.createElement('div');
   block.className = 'winners';
 
-  block.append('fff');
+  const title = document.createElement('h1');
+  title.className = 'heading';
+  title.textContent = `Winners`;
+
+  block.append(title);
 
   return block;
 }

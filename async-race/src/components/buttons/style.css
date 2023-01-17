@@ -3,8 +3,11 @@
   height: max-content;
   padding: 8px;
   background: none;
-  border: 2px solid #000;
-  font-size: 24px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: rgb(0, 0, 0);
+  background: green;
   box-sizing: border-box;
   text-transform: uppercase;
   cursor: pointer;
@@ -12,5 +15,5 @@
 }
 
 .button-element:hover {
-  background: green;
+  background: darkgreen;
 }
