@@ -8,12 +8,7 @@ import { IWinners } from '../../interfaces/IWinners';
 
 import './style.css';
 
-const winners: Array<IWinners> = [];
-getWinners().then(responce => Object.assign(winners, responce));
-const cars: Array<ICar> = [];
-getCars().then(responce => Object.assign(cars, responce));
-
-export const Winners = () => {
+export const Winners = (winners: Array<IWinners>, cars: Array<ICar>) => {
 
   const title = document.createElement('h1');
   title.className = 'heading';
