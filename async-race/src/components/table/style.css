@@ -1,0 +1,22 @@
+.table {
+  width: max-content;
+  height: max-content;
+  border: 2px solid #fff;
+  border-collapse: collapse;
+}
+
+.tr-headers th {
+  padding: 8px;
+  border: 1px solid #fff;
+  font-size: 16px;
+  color: black;
+  background: lightblue;
+}
+
+.tr-lines td {
+  padding: 7px;
+  border: 1px solid #fff;
+  font-size: 14px;
+  color: aliceblue;
+  text-align: center;
+}

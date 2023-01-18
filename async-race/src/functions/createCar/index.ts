@@ -6,5 +6,5 @@ export async function createCar(url = '', data = {}) {
     },
     body: JSON.stringify(data)
   });
-  return response.json();
+  return await response.json();
 }

@@ -5,7 +5,6 @@ export const Container = (comp: HTMLElement[], flow: string) => {
   block.className = 'container';
   block.style.flexFlow = flow;
   block.append(...comp);
-  console.log(comp);
 
   return block;
 }

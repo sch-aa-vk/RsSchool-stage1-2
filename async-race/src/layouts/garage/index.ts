@@ -1,6 +1,7 @@
 import { Button } from '../../components/button/index';
 import { Container } from '../../components/container/index';
-import { getCars } from '../../functions/getCar/index';
+// import { getCar } from '../../functions/getCar/index';
+import { getCars } from '../../functions/getCars/index';
 import { ICar } from '../../interfaces/ICar';
 import { CarTrack } from '../car-track/index';
 import { Form } from '../form/index';
