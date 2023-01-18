@@ -3,7 +3,7 @@ import { Container } from '../../components/container/index';
 // import { getCar } from '../../functions/getCar/index';
 import { getCars } from '../../functions/getCars/index';
 import { ICar } from '../../interfaces/ICar';
-import { CarTrack } from '../car-track/index';
+import { CarTrack } from '../../components/carTrack/index';
 import { Form } from '../form/index';
 
 import './style.css';

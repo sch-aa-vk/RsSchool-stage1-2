@@ -1,10 +1,17 @@
-import { Button } from '../../components/button/index';
-import { Car } from '../../components/car/index';
-import { Container } from '../../components/container/index';
+import { Button } from '../button/index';
+import { Car } from '../car/index';
+import { Container } from '../container/index';
 import { ICar } from '../../interfaces/ICar';
 import './style.css';
+import { startEngine } from '../../functions/startEngine/index';
+import { IEngine } from '../../interfaces/IEngine';
+import { animate } from '../../functions/animation/index';
 
 export const CarTrack = (car: ICar) => {
+  const carFigure = Car(car.color);
+  carFigure.className = 'car';
+  carFigure.style.left = '80px';
+
   const selectBtn = Button('select', () => {});
   const removeBtn = Button('remove', () => {});
   
@@ -14,15 +21,14 @@ export const CarTrack = (car: ICar) => {
 
   const containerFirst = Container([selectBtn, removeBtn, name], 'row wrap');
 
-  const startBtn = Button('a', () => {});
+  const startBtn = Button('a', async () => {
+    const data: IEngine = await startEngine(`http://127.0.0.1:3000/engine?id=${car.id}&status=started`).then(responce => responce);
+    return animate(function(timeFraction) {return timeFraction}, (pr) => carFigure.style.translate = pr * 1240 + 'px', data.distance / data.velocity);
+  });
   const endBtn = Button('b', () => {});
 
   const containerSecond = Container([startBtn, endBtn], 'row wrap');
   containerSecond.classList.add('second-block');
-
-  const carFigure = Car(car.color);
-  carFigure.className = 'car';
-  carFigure.style.left = '80px';
 
   const flag = document.createElement('div');
   flag.className = 'flag';

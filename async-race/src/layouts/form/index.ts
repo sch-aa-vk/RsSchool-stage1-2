@@ -1,6 +1,6 @@
 import { Button } from '../../components/button/index';
 import { Container } from '../../components/container/index';
-import { InputContainer } from '../../components/input-container/index';
+import { InputContainer } from '../../components/inputContainer/index';
 import './style.css';
 
 export const Form = () => {
