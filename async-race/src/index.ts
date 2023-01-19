@@ -10,9 +10,13 @@ import { Winners } from "./pages/winners/index";
 
 import './style.css';
 
-const garage: Array<ICar> = [];
-getCars().then(responce => Object.assign(garage, responce));
+export const garage: any = [];
+( async (arr) => {
+  const collection = await getCars();
+  return Object.assign(arr, collection);
+})(garage)
 
+//TODO: refactor winners array;
 const winners: Array<IWinners> = [];
 getWinners().then(responce => Object.assign(winners, responce));
 
@@ -30,4 +34,7 @@ const winnersBtn = Button('to winners', () => {
 
 const container = Container([garageBtn, winnersBtn], 'row wrap');
 
-body.append(container);
+setTimeout(() => {
+  body.append(container);
+  garageBtn.click();
+}, 100);
