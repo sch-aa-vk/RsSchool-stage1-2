@@ -1,6 +1,6 @@
 
-import { createCar } from '../../functions/createCar/index';
-import { Button } from '../button/index';
+import { createCar } from '../../services/createCar/index';
+import { Button } from '../../components/button/index';
 import { Container } from '../container/index';
 import './style.css';
 

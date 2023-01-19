@@ -1,12 +1,12 @@
 import { Button } from "./components/button/index";
-import { Container } from "./components/container/index";
-import { clear } from "./functions/clear/index";
-import { getCars } from "./functions/getCars/index";
-import { getWinners } from "./functions/getWinners/index";
+import { Container } from "./layouts/container/index";
+import { clear } from "./utils/helpers";
+import { getCars } from "./services/getCars/index";
+import { getWinners } from "./services/getWinners/index";
 import { ICar } from "./interfaces/ICar";
 import { IWinners } from "./interfaces/IWinners";
-import { Garage } from "./layouts/garage/index";
-import { Winners } from "./layouts/winners/index";
+import { Garage } from "./pages/garage/index";
+import { Winners } from "./pages/winners/index";
 
 import './style.css';
 
@@ -31,6 +31,3 @@ const winnersBtn = Button('to winners', () => {
 const container = Container([garageBtn, winnersBtn], 'row wrap');
 
 body.append(container);
-setTimeout(() => {
-  garageBtn.click();
-}, 10);

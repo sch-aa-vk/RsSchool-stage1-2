@@ -8,5 +8,5 @@ body {
   display: flex;
   flex-flow: column wrap;
   gap: 50px;
-  background: rgb(28, 27, 27);
+  background: #1c1b1b;
 }

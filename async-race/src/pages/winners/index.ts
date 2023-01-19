@@ -1,8 +1,8 @@
 import { Button } from '../../components/button/index';
-import { Container } from '../../components/container/index';
+import { Container } from '../../layouts/container/index';
 import { Table } from '../../components/table/index';
-import { getCars } from '../../functions/getCars/index';
-import { getWinners } from '../../functions/getWinners/index';
+import { getCars } from '../../services/getCars/index';
+import { getWinners } from '../../services/getWinners/index';
 import { ICar } from '../../interfaces/ICar';
 import { IWinners } from '../../interfaces/IWinners';
 

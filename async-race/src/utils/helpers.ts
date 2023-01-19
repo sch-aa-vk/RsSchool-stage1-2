@@ -5,3 +5,7 @@ export function clear() {
   if (winners) winners.remove();
   if (garage) garage.remove();
 }
+
+export function random(n: number) {
+  return Math.ceil(Math.random() * n);
+}

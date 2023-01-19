@@ -1,11 +1,11 @@
-import { Button } from '../button/index';
-import { Car } from '../car/index';
+import { Button } from '../../components/button/index';
+import { Car } from '../../components/car/index';
 import { Container } from '../container/index';
 import { ICar } from '../../interfaces/ICar';
 import './style.css';
-import { startEngine } from '../../functions/startEngine/index';
+import { startEngine } from '../../services/startEngine/index';
 import { IEngine } from '../../interfaces/IEngine';
-import { animate } from '../../functions/animation/index';
+import { animate } from '../../utils/animation';
 
 export const CarTrack = (car: ICar) => {
   const carFigure = Car(car.color);

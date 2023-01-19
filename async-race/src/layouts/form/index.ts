@@ -1,10 +1,10 @@
 import { Button } from '../../components/button/index';
-import { Container } from '../../components/container/index';
-import { InputContainer } from '../../components/inputContainer/index';
+import { Container } from '../container/index';
+import { InputContainer } from '../inputContainer/index';
 import { machines } from '../../database/car';
 import { colors } from '../../database/color';
-import { createCar } from '../../functions/createCar/index';
-import { random } from '../../functions/random/index';
+import { createCar } from '../../services/createCar/index';
+import { random } from '../../utils/helpers';
 import './style.css';
 
 export const Form = () => {
@@ -19,7 +19,7 @@ export const Form = () => {
   const buttonGenCars = Button('generate cars', (e) => {
     e?.preventDefault();
     for (let i = 0; i < 100; i++) {
-     createCar('http://127.0.0.1:3000/garage', {name: machines[random(machines.length - 1)], color: colors[random(colors.length)]});
+     createCar('http://127.0.0.1:3000/garage', {name: machines[random(machines.length - 1)], color: colors[random(colors.length)] || '#FFFFFF'});
     }
   });
 
