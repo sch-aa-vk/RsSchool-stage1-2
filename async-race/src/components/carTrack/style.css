@@ -44,4 +44,5 @@
 .car-name {
   font-size: 20px;
   color: rgb(186, 186, 36);
+  text-transform: capitalize;
 }

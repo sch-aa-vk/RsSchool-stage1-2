@@ -1,4 +1,4 @@
-export async function createCar(url = '', data = {}) {
+export async function createCar(url = 'http://127.0.0.1:3000/garage', data: {name: string, color: string}) {
   const response = await fetch(url, {
     method: 'POST',
     headers: {
