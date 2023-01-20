@@ -1,4 +1,4 @@
-export function animate(elem: HTMLElement, duration: number) {
+export function animate(elem: HTMLElement, draw: (elem: HTMLElement, progress: number) => {}, duration: number) {
 
   let start = performance.now();
 
@@ -23,5 +23,5 @@ function timing(timeFraction: number) {
 }
 
 function draw(elem: HTMLElement, pr: number) {
-  elem.style.translate = pr * 1240 + 'px';
+  elem.style.left = pr * (window.innerWidth - 200) + 80 + 'px';
 }

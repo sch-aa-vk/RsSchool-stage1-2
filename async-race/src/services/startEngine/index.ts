@@ -1,4 +1,4 @@
-export async function startEngine(url = 'http://127.0.0.1:3000/engine') {
+export async function startEngine(url: string) {
   const response = await fetch(url, {
     method: 'PATCH',
   });

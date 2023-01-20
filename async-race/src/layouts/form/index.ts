@@ -5,10 +5,10 @@ import { machines } from '../../database/car';
 import { colors } from '../../database/color';
 import { createCar } from '../../services/createCar/index';
 import { clearPage, generateURL, random } from '../../utils/helpers';
-import './style.css';
 import { garage } from '../../index';
 import { Garage } from '../../pages/garage/index';
-import { deleteCar } from '../../services/deleteCar/index';
+
+import './style.css';
 
 export const Form = () => {
   const form = document.createElement('form');
