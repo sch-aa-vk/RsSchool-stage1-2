@@ -7,10 +7,10 @@ import { createCar } from '../../services/createCar/index';
 import { clearPage, generateURL, random } from '../../utils/helpers';
 import { garage } from '../../index';
 import { Garage } from '../../pages/garage/index';
-
-import './style.css';
 import { ICar } from '../../interfaces/ICar';
 import { IEngine } from '../../interfaces/IEngine';
+
+import './style.css';
 
 export const Form = () => {
   const form = document.createElement('form');
@@ -26,7 +26,6 @@ export const Form = () => {
   const min = minItems >= 0 ? minItems : 0; 
 
   const items: Array<ICar> = garage.filter((item: ICar) => item.id <= maxItems && item.id > min);
-  // .map((item: ICar) => generateURL(`engine?id=${item.id}&status=started`));
 
   const buttonRace = Button('race', async (e) => {
     e?.preventDefault();
@@ -52,6 +51,11 @@ export const Form = () => {
   });
   const buttonReset = Button('reset', async (e) => {
     e?.preventDefault();
+    const cars: Array<HTMLElement> = Array.from(document.querySelectorAll('.car'));
+    cars.forEach((car) => {
+      car.style.left = '80px';
+      car.style.animation = '';
+    })
   });
   const buttonGenCars = Button('generate cars', async (e) => {
     e?.preventDefault();
