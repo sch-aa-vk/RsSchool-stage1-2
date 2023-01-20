@@ -11,6 +11,7 @@ import { ICar } from '../../interfaces/ICar';
 import { IEngine } from '../../interfaces/IEngine';
 
 import './style.css';
+import { IWinners } from '../../interfaces/IWinners';
 
 export const Form = () => {
   const form = document.createElement('form');
@@ -30,6 +31,7 @@ export const Form = () => {
   const buttonRace = Button('race', async (e) => {
     e?.preventDefault();
     const data: Array<IEngine> = [];
+    const time: Array<{time: number, id: number}> = [];
     await Promise.allSettled(items.map((car) => fetch(generateURL(`engine?id=${car.id}&status=started`), {
       method: 'PATCH'
     }).then(responce => responce.json()).then(responce => data.push(responce))));
@@ -38,16 +40,32 @@ export const Form = () => {
       cars[i].style.animation = `animate ${data[i].distance / (data[i].velocity * window.innerWidth)}s linear 1 forwards`;
       const startBtn = document.querySelectorAll('#a')[i];
       startBtn.classList.add('button-background-none');
+      time.push({time: data[i].distance / (data[i].velocity * window.innerWidth), id: items[items.length - i - 1].id});
     }
-    await Promise.allSettled(items.map((car) => fetch(generateURL(`engine?id=${car.id}&status=drive`), {
+    time.sort((a, b) => a.time - b.time);
+    await items.map((car) => fetch(generateURL(`engine?id=${car.id}&status=drive`), {
       method: 'PATCH'
     }).then(responce => {
+      const index = items.findIndex((item) => item.id === car.id);
       if (!responce.ok) {
-        const elem = cars[items.findIndex((item) => item.id === car.id)];
+        const elem = cars[index];
+        if (elem.getBoundingClientRect().left < window.innerWidth - 130) {
+          console.log(time.splice(index, 1));
+        }
         elem.style.left = `${elem.getBoundingClientRect().left - 20}px`;
         elem.style.animation = '';
       }
-    })));
+    }));
+    setTimeout(() => {
+      const text = document.querySelector('.text-above') as HTMLElement;
+      text.innerHTML = `Winner: ${items.find(item => item.id === time[0].id)?.name}!!`;
+      setTimeout(() => {
+        text.style.display = 'block';
+        setInterval(() => {
+          text.style.display = 'none';
+        }, 2000);
+      }, 1000);
+    }, time[time.length - 1].time * 1000)
   });
   const buttonReset = Button('reset', async (e) => {
     e?.preventDefault();

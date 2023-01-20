@@ -1,0 +1,15 @@
+.page-block {
+  position: relative;
+}
+
+.text-above {
+  /* display: none; */
+  position: absolute;
+  font-size: 52px;
+  top: 50%;
+  width: 100vw;
+  padding: 10px;
+  color: #fff;
+  text-shadow: 3px 2px 14px red;
+  text-align: center;
+}

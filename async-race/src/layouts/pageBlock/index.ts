@@ -4,6 +4,8 @@ import { clear } from "../../utils/helpers";
 import { CarsBlock } from "../carsBlock/index";
 import { Container } from "../container/index";
 
+import './style.css';
+
 export const pageBlock = (garage: Array<ICar>, n: number) => {
 
   const pageCount = Math.ceil(garage.length / 7);
@@ -36,7 +38,10 @@ export const pageBlock = (garage: Array<ICar>, n: number) => {
   pageBtns.style.marginTop = '20px';
   pageBtns.style.justifyContent = 'center';
 
-  const page = Container([title, cars, pageBtns], 'column wrap');
+  const text = document.createElement('h2');
+  text.className = 'text-above';
+
+  const page = Container([title, cars, pageBtns, text], 'column wrap');
   page.classList.add('page-block');
 
   return page;
