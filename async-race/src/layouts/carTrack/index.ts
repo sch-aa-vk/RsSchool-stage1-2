@@ -40,15 +40,13 @@ export const CarTrack = (car: ICar) => {
 
   const startBtn = Button('a', async (e) => {
     e?.preventDefault();
+    startBtn.classList.add('button-background-none');
+    startBtn.setAttribute('disabled', 'disabled');
+    endBtn.removeAttribute('disabled');
+    endBtn.classList.remove('button-background-none');
     let data: IEngine = await fetch(generateURL(`engine?id=${car.id}&status=started`), {
       method: 'PATCH'
     }).then(responce => responce.json());
-    const style = document.createElement('style');
-    style.innerHTML = `@keyframes animate {
-      from {left: ${carFigure.style.left}px;}
-      to {left: calc(100vw - 120px);}
-    }`;
-    document.body.append(style);
     carFigure.style.animation = `animate ${data.distance / (data.velocity * window.innerWidth)}s linear 1 forwards`;
     fetch(generateURL(`engine?id=${car.id}&status=drive`), {
       method: 'PATCH'
@@ -56,16 +54,24 @@ export const CarTrack = (car: ICar) => {
       if (!responce.ok) {
         carFigure.style.left = `${carFigure.getBoundingClientRect().left - 20}px`;
         carFigure.style.animation = '';
+        endBtn.setAttribute('disabled', 'disabled');
+        endBtn.classList.add('button-background-none');
       }
     })
   });
-  startBtn.classList.add('button-background-none');
-  
+
   const endBtn = Button('b', async (e) => {
     e?.preventDefault();
     carFigure.style.left = `${carFigure.getBoundingClientRect().left - 20}px`;
     carFigure.style.animation = '';
+    startBtn.removeAttribute('disabled');
+    endBtn.classList.add('button-background-none');
+    startBtn.classList.remove('button-background-none');
+    await fetch(generateURL(`engine?id=${car.id}&status=stopped`), {
+      method: 'PATCH',
+    }).then(responce => responce.json());
   });
+  endBtn.setAttribute('disabled', 'disabled');
   endBtn.classList.add('button-background-none');
 
   const containerSecond = Container([startBtn, endBtn], 'row wrap');

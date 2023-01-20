@@ -9,6 +9,8 @@ import { garage } from '../../index';
 import { Garage } from '../../pages/garage/index';
 
 import './style.css';
+import { ICar } from '../../interfaces/ICar';
+import { IEngine } from '../../interfaces/IEngine';
 
 export const Form = () => {
   const form = document.createElement('form');
@@ -17,8 +19,40 @@ export const Form = () => {
   const lineCreate = InputContainer('create');
   const lineUpdate = InputContainer('update');
 
-  const buttonRace = Button('race', () => {});
-  const buttonReset = Button('reset', () => {});
+  const currentPage = localStorage['page'] ? JSON.parse(localStorage['page']) : 1;
+  const maxItems = garage.length - (currentPage - 1) * 7;
+  const minItems = maxItems - 7;
+
+  const min = minItems >= 0 ? minItems : 0; 
+
+  const items: Array<ICar> = garage.filter((item: ICar) => item.id <= maxItems && item.id > min);
+  // .map((item: ICar) => generateURL(`engine?id=${item.id}&status=started`));
+
+  const buttonRace = Button('race', async (e) => {
+    e?.preventDefault();
+    const data: Array<IEngine> = [];
+    await Promise.allSettled(items.map((car) => fetch(generateURL(`engine?id=${car.id}&status=started`), {
+      method: 'PATCH'
+    }).then(responce => responce.json()).then(responce => data.push(responce))));
+    const cars: Array<HTMLElement> = Array.from(document.querySelectorAll('.car'));
+    for (let i = 0; i < cars.length; i++) {
+      cars[i].style.animation = `animate ${data[i].distance / (data[i].velocity * window.innerWidth)}s linear 1 forwards`;
+      const startBtn = document.querySelectorAll('#a')[i];
+      startBtn.classList.add('button-background-none');
+    }
+    await Promise.allSettled(items.map((car) => fetch(generateURL(`engine?id=${car.id}&status=drive`), {
+      method: 'PATCH'
+    }).then(responce => {
+      if (!responce.ok) {
+        const elem = cars[items.findIndex((item) => item.id === car.id)];
+        elem.style.left = `${elem.getBoundingClientRect().left - 20}px`;
+        elem.style.animation = '';
+      }
+    })));
+  });
+  const buttonReset = Button('reset', async (e) => {
+    e?.preventDefault();
+  });
   const buttonGenCars = Button('generate cars', async (e) => {
     e?.preventDefault();
     const btn = document.querySelector('#generatecars') as HTMLElement;

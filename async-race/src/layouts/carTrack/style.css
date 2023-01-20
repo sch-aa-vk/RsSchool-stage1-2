@@ -25,10 +25,10 @@
   bottom: 0;
 }
 
-/* @keyframes animate {
+@keyframes animate {
   from {left: 80px;}
-  to {left: calc(100vw - 200px);}
-} */
+  to {left: calc(100vw - 120px);}
+}
 
 .flag {
   position: absolute;
