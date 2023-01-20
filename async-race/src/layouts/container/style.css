@@ -1,5 +1,5 @@
 .container {
-  width: max-content;
+  max-width: 100%;
   display: flex;
   gap: 20px;
 }

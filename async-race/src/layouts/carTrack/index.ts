@@ -25,7 +25,9 @@ export const CarTrack = (car: ICar) => {
     const data: IEngine = await startEngine(`http://127.0.0.1:3000/engine?id=${car.id}&status=started`).then(responce => responce);
     return animate(carFigure, data.distance / data.velocity);
   });
+  startBtn.classList.add('button-background-none');
   const endBtn = Button('b', async () => {});
+  endBtn.classList.add('button-background-none');
 
   const containerSecond = Container([startBtn, endBtn], 'row wrap');
   containerSecond.classList.add('second-block');

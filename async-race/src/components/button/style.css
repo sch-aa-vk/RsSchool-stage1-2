@@ -17,3 +17,9 @@
 .button-element:hover {
   background: darkgreen;
 }
+
+.button-background-none {
+  background: none;
+  border: 2px solid green;
+  color: green;
+}

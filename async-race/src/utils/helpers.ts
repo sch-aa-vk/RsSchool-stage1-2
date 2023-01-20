@@ -1,9 +1,12 @@
-export function clear() {
-  const winners = document.querySelector('.winners') as HTMLElement;
-  const garage = document.querySelector('.garage') as HTMLElement;
+export function clearPage() {
+  clear('winners');
+  clear('garage');
+}
 
-  if (winners) winners.remove();
-  if (garage) garage.remove();
+export function clear(elem: string) {
+  const item = document.querySelector(`.${elem}`) as HTMLElement;
+
+  if (item) item.remove();
 }
 
 export function random(n: number) {

@@ -5,6 +5,7 @@ import { CarTrack } from '../../layouts/carTrack/index';
 import { Form } from '../../layouts/form/index';
 
 import './style.css';
+import { pageBlock } from '../../layouts/pageBlock/index';
 
 export const Garage = (garage: Array<ICar>) => {
   
@@ -12,26 +13,9 @@ export const Garage = (garage: Array<ICar>) => {
   title.className = 'heading';
   title.textContent = `Garage (${garage.length})`;
 
-  const page = document.createElement('h2');
-  page.className = 'heading';
-  page.textContent = `Page #${1}`;
+  const page = pageBlock(garage, 1);
 
-  const titles = Container([title, page], 'column wrap')
-  titles.classList.add('titles');
-
-  const cars = Container([], 'column wrap');
-  cars.classList.add('cars-track');
-  for (let i = 0; i < garage.length; i++) {
-    const track = CarTrack(garage[i]);
-    cars.prepend(track);
-  }
-
-  const prevBtn = Button('previous', () => {});
-  const nextBtn = Button('next', () => {});
-
-  const pageBtns = Container([prevBtn, nextBtn], 'row wrap');
-
-  const block = Container([Form(), titles, cars, pageBtns], 'column wrap');
+  const block = Container([Form(), title, page], 'column wrap');
   block.classList.add('garage');
 
   return block;

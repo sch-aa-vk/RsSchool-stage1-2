@@ -4,7 +4,7 @@ import { InputContainer } from '../inputContainer/index';
 import { machines } from '../../database/car';
 import { colors } from '../../database/color';
 import { createCar } from '../../services/createCar/index';
-import { clear, generateURL, random } from '../../utils/helpers';
+import { clearPage, generateURL, random } from '../../utils/helpers';
 import './style.css';
 import { garage } from '../../index';
 import { Garage } from '../../pages/garage/index';
@@ -26,7 +26,7 @@ export const Form = () => {
     }
     garage.splice(garage.length - 100, 100);
     console.log(garage);
-    clear();
+    clearPage();
     document.body.append(Garage(garage));
   });
   const buttonGenCars = Button('generate cars', async (e) => {
@@ -37,7 +37,7 @@ export const Form = () => {
     for (let i = 0; i < 100; i++) {
       garage.push(await createCar(generateURL('garage'), {name: machines[random(machines.length - 1)], color: colors[random(colors.length)] || '#FFFFFF'}));
     }
-    clear();
+    clearPage();
     document.body.append(Garage(garage));
   });
 

@@ -19,12 +19,6 @@
   gap: 10px;
 }
 
-.second-block > button {
-  background: none;
-  border: 2px solid green;
-  color: green;
-}
-
 .car {
   position: absolute;
   bottom: 0;

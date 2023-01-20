@@ -1,6 +1,6 @@
 import { Button } from "./components/button/index";
 import { Container } from "./layouts/container/index";
-import { clear } from "./utils/helpers";
+import { clearPage } from "./utils/helpers";
 import { getCars } from "./services/getCars/index";
 import { getWinners } from "./services/getWinners/index";
 import { ICar } from "./interfaces/ICar";
@@ -23,12 +23,12 @@ getWinners().then(responce => Object.assign(winners, responce));
 const body = document.body;
 
 const garageBtn = Button('to garage', () => {
-  clear();
+  clearPage();
   body.append(Garage(garage));
 })
 
 const winnersBtn = Button('to winners', () => {
-  clear();
+  clearPage();
   body.append(Winners(winners, garage));
 })
 
