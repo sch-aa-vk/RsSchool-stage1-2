@@ -12,8 +12,9 @@ export const Garage = (garage: Array<ICar>) => {
   title.textContent = `Garage (${garage.length})`;
 
   const currentPage = localStorage['page'] ? JSON.parse(localStorage['page']) : 1;
+  const pageNumber = currentPage <= Math.ceil(garage.length / 7) ? currentPage : Math.ceil(garage.length / 7);
 
-  const page = pageBlock(garage, currentPage);
+  const page = pageBlock(garage, pageNumber);
 
   const block = Container([Form(), title, page], 'column wrap');
   block.classList.add('garage');

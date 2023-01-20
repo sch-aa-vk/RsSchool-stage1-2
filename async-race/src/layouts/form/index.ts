@@ -22,10 +22,8 @@ export const Form = () => {
     e?.preventDefault();
     for (let i = garage.length; i > garage.length - 100; i--) {
       await deleteCar(generateURL(`garage/${i}`));
-      console.log(i);
     }
     garage.splice(garage.length - 100, 100);
-    console.log(garage);
     clearPage();
     document.body.append(Garage(garage));
   });
