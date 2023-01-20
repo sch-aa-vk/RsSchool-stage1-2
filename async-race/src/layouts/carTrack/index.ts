@@ -16,7 +16,14 @@ export const CarTrack = (car: ICar) => {
   carFigure.className = 'car';
   carFigure.style.left = '80px';
 
-  const selectBtn = Button('select', () => {});
+  const selectBtn = Button('select', (e) => {
+    e?.preventDefault();
+    const inputText = document.querySelectorAll('.input-text')[1] as HTMLElement;
+    const inputColor = document.querySelectorAll('.input-color')[1] as HTMLElement;
+    inputText.setAttribute('value', car.name);
+    inputColor.setAttribute('value', car.color);
+    localStorage['currentCar'] = JSON.stringify(car);
+  });
   const removeBtn = Button('remove', async (e) => {
     e?.preventDefault();
     await deleteCar(generateURL(`garage/${car.id}`));
