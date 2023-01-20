@@ -18,15 +18,7 @@ export const Form = () => {
   const lineUpdate = InputContainer('update');
 
   const buttonRace = Button('race', () => {});
-  const buttonReset = Button('reset', async (e) => {
-    e?.preventDefault();
-    for (let i = garage.length; i > garage.length - 100; i--) {
-      await deleteCar(generateURL(`garage/${i}`));
-    }
-    garage.splice(garage.length - 100, 100);
-    clearPage();
-    document.body.append(Garage(garage));
-  });
+  const buttonReset = Button('reset', () => {});
   const buttonGenCars = Button('generate cars', async (e) => {
     e?.preventDefault();
     const btn = document.querySelector('#generatecars') as HTMLElement;

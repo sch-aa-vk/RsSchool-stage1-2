@@ -6,6 +6,10 @@ import './style.css';
 import { startEngine } from '../../services/startEngine/index';
 import { IEngine } from '../../interfaces/IEngine';
 import { animate } from '../../utils/animation';
+import { deleteCar } from '../../services/deleteCar/index';
+import { clearPage, generateURL } from '../../utils/helpers';
+import { garage } from '../../index';
+import { Garage } from '../../pages/garage/index';
 
 export const CarTrack = (car: ICar) => {
   const carFigure = Car(car.color);
@@ -13,7 +17,13 @@ export const CarTrack = (car: ICar) => {
   carFigure.style.left = '80px';
 
   const selectBtn = Button('select', () => {});
-  const removeBtn = Button('remove', () => {});
+  const removeBtn = Button('remove', async (e) => {
+    e?.preventDefault();
+    await deleteCar(generateURL(`garage/${car.id}`));
+    garage.splice(car.id - 1, 1);
+    clearPage();
+    document.body.append(Garage(garage));
+  });
   
   const name = document.createElement('p');
   name.className = 'car-name';
