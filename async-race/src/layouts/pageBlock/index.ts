@@ -1,7 +1,6 @@
 import { Button } from "../../components/button/index";
 import { ICar } from "../../interfaces/ICar";
-import { Garage } from "../../pages/garage/index";
-import { clear, clearPage } from "../../utils/helpers";
+import { clear } from "../../utils/helpers";
 import { CarsBlock } from "../carsBlock/index";
 import { Container } from "../container/index";
 
@@ -9,6 +8,7 @@ export const pageBlock = (garage: Array<ICar>, n: number) => {
 
   const pageCount = Math.ceil(garage.length / 7);
   let currentPage = n;
+  localStorage['page'] = currentPage;
 
   const title = document.createElement('h2');
   title.className = 'heading';
@@ -27,7 +27,9 @@ export const pageBlock = (garage: Array<ICar>, n: number) => {
       clear('page-block');
       document.querySelector('.garage')?.append(pageBlock(garage, currentPage));
     });
-    btn.classList.add('button-background-none');
+    if (btn.innerHTML !== `${currentPage}`) {
+      btn.classList.add('button-background-none');
+    }
     pageBtns.append(btn);
   }
   pageBtns.append(nextBtn);

@@ -1,10 +1,11 @@
 .button-element {
   width: max-content;
   height: max-content;
-  padding: 8px;
+  padding: 7px;
   background: none;
   border: none;
   border-radius: 5px;
+  border: 2px solid green;
   font-size: 16px;
   color: rgb(0, 0, 0);
   background: green;
@@ -20,6 +21,5 @@
 
 .button-background-none {
   background: none;
-  border: 2px solid green;
   color: green;
 }
