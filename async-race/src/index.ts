@@ -10,15 +10,17 @@ import { Winners } from "./pages/winners/index";
 
 import './style.css';
 
-export const garage: any = [];
+export const garage: Array<ICar> = [];
 ( async (arr) => {
   const collection = await getCars();
   return Object.assign(arr, collection);
 })(garage)
 
-//TODO: refactor winners array;
-const winners: Array<IWinners> = [];
-getWinners().then(responce => Object.assign(winners, responce));
+export const winners: Array<IWinners> = [];
+(async (arr) => {
+  const collection = await getWinners();
+  return Object.assign(arr, collection);
+})(winners)
 
 const body = document.body;
 

@@ -13,11 +13,12 @@ export const Table = (items: Array<IWinners>, cars: Array<ICar>) => {
   table.append(tr);
 
   for (let item of items) {
+    const index = items.indexOf(item);
     const car: ICar = cars.find(i => i.id === item.id)!;
     const tr = document.createElement('tr');
     tr.className = 'tr-lines';
 
-    tr.innerHTML = `<td>${item.id}</td><td>${car.name}</td><td>${item.wins}</td><td>${item.time}</td>`;
+    tr.innerHTML = `<td>${index + 1}</td><td>${car.name}</td><td>${item.wins}</td><td>${item.time.toFixed(2)}</td>`;
 
     table.append(tr);
   }

@@ -9,4 +9,5 @@ body {
   flex-flow: column wrap;
   gap: 50px;
   background: #1c1b1b;
+  overflow-x: hidden;
 }
