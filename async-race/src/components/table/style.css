@@ -1,14 +1,14 @@
 .table {
-  width: max-content;
+  width: 100%;
   height: max-content;
   border: 2px solid #fff;
   border-collapse: collapse;
 }
 
 .tr-headers th {
-  padding: 8px;
+  padding: 10px;
   border: 1px solid #fff;
-  font-size: 16px;
+  font-size: 20px;
   color: black;
   background: lightblue;
 }
@@ -16,7 +16,7 @@
 .tr-lines td {
   padding: 7px;
   border: 1px solid #fff;
-  font-size: 14px;
+  font-size: 18px;
   color: aliceblue;
   text-align: center;
 }

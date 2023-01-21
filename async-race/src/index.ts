@@ -10,6 +10,8 @@ import { Winners } from "./pages/winners/index";
 
 import './style.css';
 
+const page = localStorage['page'] ? localStorage['page'] : "garage";
+
 export const garage: Array<ICar> = [];
 ( async (arr) => {
   const collection = await getCars();
@@ -26,17 +28,27 @@ const body = document.body;
 
 const garageBtn = Button('to garage', () => {
   clearPage();
+  localStorage['page'] = "garage";
   body.append(Garage(garage));
 })
 
 const winnersBtn = Button('to winners', () => {
   clearPage();
+  localStorage['page'] = "winners";
   body.append(Winners(winners, garage));
 })
 
 const container = Container([garageBtn, winnersBtn], 'row wrap');
 
 setTimeout(() => {
-  body.append(container);
-  garageBtn.click();
+  switch(page) {
+    case "garage":
+      body.append(container);
+      garageBtn.click();
+      break;
+    case "winners":
+      body.append(container);
+      winnersBtn.click();
+      break;
+  }
 }, 100);

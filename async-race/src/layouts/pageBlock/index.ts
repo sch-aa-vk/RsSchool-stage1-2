@@ -10,7 +10,7 @@ export const pageBlock = (garage: Array<ICar>, n: number) => {
 
   const pageCount = Math.ceil(garage.length / 7);
   let currentPage = n;
-  localStorage['page'] = currentPage;
+  localStorage['pageGarage'] = currentPage;
 
   const title = document.createElement('h2');
   title.className = 'heading';

@@ -20,7 +20,7 @@ export const Form = () => {
   const lineCreate = InputContainer('create');
   const lineUpdate = InputContainer('update');
 
-  const currentPage = localStorage['page'] ? JSON.parse(localStorage['page']) : 1;
+  const currentPage = localStorage['pageGarage'] ? JSON.parse(localStorage['pageGarage']) : 1;
   const maxItems = garage.length - (currentPage - 1) * 7;
   const minItems = maxItems - 7;
 
@@ -52,7 +52,7 @@ export const Form = () => {
         const elem = cars[index];
         elem.style.left = `${elem.getBoundingClientRect().left - 20}px`;
         elem.style.animation = '';
-        if (elem.getBoundingClientRect().left < window.innerWidth - 100) {
+        if (elem.getBoundingClientRect().left !== (window.innerWidth - 100)) {
           names.splice(names.findIndex((item) => item.id === items[index].id), 1);
         }
       }
