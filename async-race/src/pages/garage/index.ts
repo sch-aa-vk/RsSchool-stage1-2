@@ -16,7 +16,7 @@ export const Garage = (garage: Array<ICar>) => {
 
   const page = pageBlock(garage, pageNumber || 1);
 
-  const block = Container([Form(), title, page], 'column wrap');
+  const block = Container([Form(currentPage), title, page], 'column wrap');
   block.classList.add('garage');
 
   return block;

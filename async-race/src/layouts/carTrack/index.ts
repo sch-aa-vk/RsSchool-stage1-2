@@ -13,7 +13,7 @@ import { Garage } from '../../pages/garage/index';
 import './style.css';
 
 export const CarTrack = (car: ICar) => {
-  const carFigure = Car(car.color);
+  const carFigure = Car(car);
   carFigure.className = 'car';
 
   const selectBtn = Button('select', (e) => {

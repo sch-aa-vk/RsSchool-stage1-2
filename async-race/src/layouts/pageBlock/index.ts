@@ -1,8 +1,10 @@
 import { Button } from "../../components/button/index";
 import { ICar } from "../../interfaces/ICar";
-import { clear } from "../../utils/helpers";
+import { Garage } from "../../pages/garage/index";
+import { clear, clearPage } from "../../utils/helpers";
 import { CarsBlock } from "../carsBlock/index";
 import { Container } from "../container/index";
+import { Form } from "../form/index";
 
 import './style.css';
 
@@ -27,6 +29,8 @@ export const pageBlock = (garage: Array<ICar>, n: number) => {
       e?.preventDefault();
       currentPage = i;
       clear('page-block');
+      clear('form');
+      document.querySelector('.garage')?.append(Form(currentPage));
       document.querySelector('.garage')?.append(pageBlock(garage, currentPage));
     });
     if (btn.innerHTML !== `${currentPage}`) {
