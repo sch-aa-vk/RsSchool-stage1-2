@@ -1,10 +1,11 @@
 import { winners } from '../../index';
 import { ICar } from '../../interfaces/ICar';
 import { IWinners } from '../../interfaces/IWinners';
-import { Container } from '../../layouts/container/index';
+import { Container } from '../container/index';
 import { clear } from '../../utils/helpers';
-import { Button } from '../button/index';
+import { Button } from '../../components/button/index';
 import './style.css';
+import { Sort } from '../sort/index';
 
 export const Table = (items: Array<IWinners>, cars: Array<ICar>, n: number) => {
 
@@ -18,6 +19,8 @@ export const Table = (items: Array<IWinners>, cars: Array<ICar>, n: number) => {
   const title = document.createElement('h2');
   title.className = 'heading';
   title.textContent = `Page #${n}`;
+
+  const select = Sort();
 
   const table = document.createElement('table');
   table.className = 'table';
@@ -59,7 +62,7 @@ export const Table = (items: Array<IWinners>, cars: Array<ICar>, n: number) => {
   pageBtns.style.marginTop = '20px';
   pageBtns.style.justifyContent = 'center';
 
-  const page = Container([title, table, pageBtns], 'column wrap');
+  const page = Container([title, select, table, pageBtns], 'column wrap');
   page.classList.add('page-table');
 
   return page;

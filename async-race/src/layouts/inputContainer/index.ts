@@ -13,11 +13,17 @@ export const InputContainer = (text: 'create' | 'update') => {
   const inputText = document.createElement('input');
   inputText.setAttribute('type', 'text');
   inputText.className = 'input-text';
+  if (text === 'update') {
+    inputText.setAttribute('value', localStorage['currentCar'] ? JSON.parse(localStorage['currentCar']).name : '');
+  }
 
   const inputColor = document.createElement('input');
   inputColor.setAttribute('type', 'color');
   inputColor.setAttribute('value', '#ffffff');
   inputColor.className = 'input-color';
+  if (text === 'update') {
+    inputColor.setAttribute('value', localStorage['currentCar'] ? JSON.parse(localStorage['currentCar']).color : '#ffffff');
+  }
 
   const button = Button(`${text}`, async (e) => {
     e?.preventDefault();
@@ -27,6 +33,7 @@ export const InputContainer = (text: 'create' | 'update') => {
       const car = localStorage['currentCar'] ? JSON.parse(localStorage['currentCar']) : null;
       await updateCar(generateURL(`garage/${car.id}`), {name: inputText.value, color: inputColor.value});
       garage.splice(car.id - 1, 1, {name: inputText.value, color: inputColor.value, id: car.id});
+      localStorage.removeItem('currentCar');
     }
     clearPage();
     document.body.append(Garage(garage));

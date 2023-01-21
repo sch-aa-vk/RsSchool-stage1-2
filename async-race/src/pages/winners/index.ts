@@ -1,6 +1,6 @@
 import { Button } from '../../components/button/index';
 import { Container } from '../../layouts/container/index';
-import { Table } from '../../components/table/index';
+import { Table } from '../../layouts/table/index';
 import { ICar } from '../../interfaces/ICar';
 import { IWinners } from '../../interfaces/IWinners';
 
