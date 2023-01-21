@@ -11,7 +11,6 @@ import { ICar } from '../../interfaces/ICar';
 import { IEngine } from '../../interfaces/IEngine';
 
 import './style.css';
-import { IWinners } from '../../interfaces/IWinners';
 
 export const Form = () => {
   const form = document.createElement('form');
@@ -42,15 +41,16 @@ export const Form = () => {
       startBtn.classList.add('button-background-none');
       time.push({time: data[i].distance / (data[i].velocity * window.innerWidth), id: items[items.length - i - 1].id});
     }
-    time.sort((a, b) => a.time - b.time);
+    time.sort((a, b) => b.time - a.time);
+    const names = [...time];
     await items.map((car) => fetch(generateURL(`engine?id=${car.id}&status=drive`), {
       method: 'PATCH'
     }).then(responce => {
       const index = items.findIndex((item) => item.id === car.id);
       if (!responce.ok) {
         const elem = cars[index];
-        if (elem.getBoundingClientRect().left < window.innerWidth - 130) {
-          console.log(time.splice(index, 1));
+        if (elem.getBoundingClientRect().left < window.innerWidth - 120) {
+          console.log(names.splice(names.findIndex((item) => item.id === items[index].id), 1))
         }
         elem.style.left = `${elem.getBoundingClientRect().left - 20}px`;
         elem.style.animation = '';
@@ -58,14 +58,15 @@ export const Form = () => {
     }));
     setTimeout(() => {
       const text = document.querySelector('.text-above') as HTMLElement;
-      text.innerHTML = `Winner: ${items.find(item => item.id === time[0].id)?.name}!!`;
+      names.sort((a, b) => a.time - b.time);
+      text.innerHTML = `Winner: ${items.find(item => item.id === names[0].id)?.name}!!`;
       setTimeout(() => {
         text.style.display = 'block';
         setInterval(() => {
           text.style.display = 'none';
         }, 2000);
-      }, 1000);
-    }, time[time.length - 1].time * 1000)
+      }, 10);
+    }, time[0].time * 1000)
   });
   const buttonReset = Button('reset', async (e) => {
     e?.preventDefault();
