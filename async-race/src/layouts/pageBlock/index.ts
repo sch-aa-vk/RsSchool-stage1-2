@@ -1,7 +1,6 @@
 import { Button } from "../../components/button/index";
 import { ICar } from "../../interfaces/ICar";
-import { Garage } from "../../pages/garage/index";
-import { clear, clearPage } from "../../utils/helpers";
+import { clear } from "../../utils/helpers";
 import { CarsBlock } from "../carsBlock/index";
 import { Container } from "../container/index";
 import { Form } from "../form/index";
@@ -24,14 +23,14 @@ export const pageBlock = (garage: Array<ICar>, n: number) => {
     if (currentPage !== 1) currentPage--;
     clear('page-block');
     clear('form');
-    document.querySelector('.garage')?.append(Form(currentPage));
+    document.querySelector('.garage')?.append(Form());
     document.querySelector('.garage')?.append(pageBlock(garage, currentPage));
   });
   const nextBtn = Button('next', () => {
     if (currentPage !== pageCount) currentPage++;
     clear('page-block');
     clear('form');
-    document.querySelector('.garage')?.append(Form(currentPage));
+    document.querySelector('.garage')?.append(Form());
     document.querySelector('.garage')?.append(pageBlock(garage, currentPage));
   });
 
@@ -42,7 +41,7 @@ export const pageBlock = (garage: Array<ICar>, n: number) => {
       currentPage = i;
       clear('page-block');
       clear('form');
-      document.querySelector('.garage')?.append(Form(currentPage));
+      document.querySelector('.garage')?.append(Form());
       document.querySelector('.garage')?.append(pageBlock(garage, currentPage));
     });
     if (btn.innerHTML !== `${currentPage}`) {

@@ -29,13 +29,13 @@ const body = document.body;
 const garageBtn = Button('to garage', () => {
   clearPage();
   localStorage['page'] = "garage";
-  body.append(Garage(garage));
+  body.append(Garage());
 })
 
 const winnersBtn = Button('to winners', () => {
   clearPage();
   localStorage['page'] = "winners";
-  body.append(Winners(winners, garage));
+  body.append(Winners());
 })
 
 const container = Container([garageBtn, winnersBtn], 'row wrap');

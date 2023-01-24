@@ -16,6 +16,12 @@ export const InputContainer = (text: 'create' | 'update') => {
   if (text === 'update') {
     inputText.setAttribute('value', localStorage['currentCar'] ? JSON.parse(localStorage['currentCar']).name : '');
   }
+  inputText.addEventListener('change', () => {
+    const car = JSON.parse(localStorage['currentCar']);
+    car.name = inputText.value;
+    localStorage.removeItem('currentCar');
+    localStorage['currentCar'] = JSON.stringify(car);
+  })
 
   const inputColor = document.createElement('input');
   inputColor.setAttribute('type', 'color');
@@ -36,7 +42,7 @@ export const InputContainer = (text: 'create' | 'update') => {
       localStorage.removeItem('currentCar');
     }
     clearPage();
-    document.body.append(Garage(garage));
+    document.body.append(Garage());
   });
 
   const block = Container([inputText, inputColor, button], 'row wrap')

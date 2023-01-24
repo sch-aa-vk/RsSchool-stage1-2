@@ -1,8 +1,7 @@
 import { Button } from '../../components/button/index';
 import { Container } from '../container/index';
 import { InputContainer } from '../inputContainer/index';
-import { machines } from '../../database/car';
-import { colors } from '../../database/color';
+import { machines, machinesPt2 } from '../../database/car';
 import { createCar } from '../../services/createCar/index';
 import { clearPage, generateURL, random } from '../../utils/helpers';
 import { garage, winners } from '../../index';
@@ -13,22 +12,19 @@ import { createWinners } from '../../services/createWinner/index';
 
 import './style.css';
 
-export const Form = (currentPage: number) => {
+export const Form = () => {
   const form = document.createElement('form');
   form.className = 'form';
 
   const lineCreate = InputContainer('create');
   const lineUpdate = InputContainer('update');
 
-  const maxItems = garage.length - (currentPage - 1) * 7;
-  const minItems = maxItems - 7;
-
-  const min = minItems >= 0 ? minItems : 0; 
-
-  const items: Array<ICar> = garage.filter((item: ICar) => item.id <= maxItems && item.id > min);
+  const items: Array<ICar> = [];
 
   const buttonRace = Button('race', async (e) => {
     e?.preventDefault();
+    const carItems = Array.from(document.querySelectorAll('.car')).map((item) => +item.id).sort((a, b) => a - b);
+    Object.assign(items, garage.filter((item: ICar) => item.id <= carItems[carItems.length - 1] && item.id >= carItems[0]))
     const data: Array<IEngine> = [];
     const time: Array<{time: number, id: number}> = [];
     await Promise.all(items.map((car) => fetch(generateURL(`engine?id=${car.id}&status=started`), {
@@ -49,7 +45,7 @@ export const Form = (currentPage: number) => {
       button.setAttribute('disabled', 'disabled');
     }
     buttonReset.removeAttribute('disabled');
-    await Promise.allSettled(items.map((car) => fetch(generateURL(`engine?id=${car.id}&status=drive`), {
+    Promise.allSettled(items.map((car) => fetch(generateURL(`engine?id=${car.id}&status=drive`), {
       method: 'PATCH'
     }).then(responce => {
       const index = items.findIndex((item) => item.id === car.id);
@@ -63,8 +59,8 @@ export const Form = (currentPage: number) => {
         }
       }
     })));
+    time.sort((a, b) => a.time - b.time);
     setTimeout(async () => {
-      time.sort((a, b) => a.time - b.time);
       const text = document.querySelector('.text-above') as HTMLElement;
       const item = items.find(item => item.id === time[0].id)!;
       text.innerHTML = `Winner: ${item.name}!!`;
@@ -95,7 +91,7 @@ export const Form = (currentPage: number) => {
           method: 'PATCH'
         }))
       }, 10);
-    }, 10)
+    }, time[0].time * 1000)
   });
 
   const buttonReset = Button('reset', async (e) => {
@@ -105,7 +101,7 @@ export const Form = (currentPage: number) => {
       button.removeAttribute('disabled');
     }
     clearPage();
-    document.body.append(Garage(garage));
+    document.body.append(Garage());
   });
   buttonReset.setAttribute('disabled', 'disabled');
   const buttonGenCars = Button('generate cars', async (e) => {
@@ -114,10 +110,12 @@ export const Form = (currentPage: number) => {
     btn.innerHTML = 'loading';
     btn.setAttribute('disabled', 'disabled');
     for (let i = 0; i < 100; i++) {
-      garage.push(await createCar(generateURL('garage'), {name: machines[random(machines.length - 1)], color: colors[random(colors.length)] || '#FFFFFF'}));
+      const carName =  machines[random(machines.length - 1)] + " " + machinesPt2[random(machinesPt2.length - 1)];
+      const randomColor = Math.floor(Math.random()*16777215).toString(16);
+      garage.push(await createCar(generateURL('garage'), {name: carName, color: `#${randomColor}`}));
     }
     clearPage();
-    document.body.append(Garage(garage));
+    document.body.append(Garage());
   });
 
   const block = Container([buttonRace, buttonReset, buttonGenCars], 'row wrap');

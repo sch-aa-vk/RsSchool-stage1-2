@@ -4,8 +4,9 @@ import { Form } from '../../layouts/form/index';
 
 import './style.css';
 import { pageBlock } from '../../layouts/pageBlock/index';
+import { garage } from '../../index';
 
-export const Garage = (garage: Array<ICar>) => {
+export const Garage = () => {
   
   const title = document.createElement('h1');
   title.className = 'heading';
@@ -16,7 +17,7 @@ export const Garage = (garage: Array<ICar>) => {
 
   const page = pageBlock(garage, pageNumber || 1);
 
-  const block = Container([Form(currentPage), title, page], 'column wrap');
+  const block = Container([Form(), title, page], 'column wrap');
   block.classList.add('garage');
 
   return block;

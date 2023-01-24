@@ -2,12 +2,10 @@ import { Button } from '../../components/button/index';
 import { Car } from '../../components/car/index';
 import { Container } from '../container/index';
 import { ICar } from '../../interfaces/ICar';
-import { startEngine } from '../../services/startEngine/index';
 import { IEngine } from '../../interfaces/IEngine';
-import { animate } from '../../utils/animation';
 import { deleteCar } from '../../services/deleteCar/index';
 import { clearPage, generateURL } from '../../utils/helpers';
-import { garage } from '../../index';
+import { garage, winners } from '../../index';
 import { Garage } from '../../pages/garage/index';
 
 import './style.css';
@@ -28,9 +26,14 @@ export const CarTrack = (car: ICar) => {
     e?.preventDefault();
     await deleteCar(generateURL(`garage/${car.id}`));
     const index = garage.findIndex((item) => item.id === car.id);
+    const winner = winners.find((item) => item.id === garage[index].id);
+    if (winner) {
+      const index = winners.indexOf(winner);
+      winners.splice(index, 1);
+    };
     garage.splice(index, 1);
     clearPage();
-    document.body.append(Garage(garage));
+    document.body.append(Garage());
   });
   
   const name = document.createElement('p');
@@ -42,6 +45,7 @@ export const CarTrack = (car: ICar) => {
   const startBtn = Button('a', async (e) => {
     e?.preventDefault();
     startBtn.setAttribute('disabled', 'disabled');
+    endBtn.removeAttribute('disabled');
     let data: IEngine = await fetch(generateURL(`engine?id=${car.id}&status=started`), {
       method: 'PATCH'
     }).then(responce => responce.json());
@@ -52,25 +56,19 @@ export const CarTrack = (car: ICar) => {
       if (!responce.ok) {
         carFigure.style.left = `${carFigure.getBoundingClientRect().left - 20}px`;
         carFigure.style.animation = '';
-        endBtn.removeAttribute('disabled');
       }
     })
-    setTimeout(() => {
-      endBtn.removeAttribute('disabled');
-    }, data.distance / (data.velocity * 1440) * 1000);
   });
 
   const endBtn = Button('b', async (e) => {
     e?.preventDefault();
-    // carFigure.style.left = `80px`;
-    // carFigure.style.animation = '';
-    // startBtn.removeAttribute('disabled');
-    // endBtn.setAttribute('disabled', 'disabled');
     await fetch(generateURL(`engine?id=${car.id}&status=stopped`), {
       method: 'PATCH',
     }).then(responce => responce.json());
-    clearPage();
-    document.body.append(Garage(garage));
+    carFigure.style.left = `80px`;
+    carFigure.style.animation = '';
+    startBtn.removeAttribute('disabled');
+    endBtn.setAttribute('disabled', 'disabled');
   });
   endBtn.setAttribute('disabled', 'disabled');
 

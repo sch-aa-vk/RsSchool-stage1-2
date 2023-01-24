@@ -49,7 +49,7 @@ export const Sort = () => {
         break;
     }
     clear('page-table');
-    document.querySelector('.winners')?.append(Table(winners, garage, currentPage));
+    document.querySelector('.winners')?.append(Table(currentPage));
   })
 
   return select;

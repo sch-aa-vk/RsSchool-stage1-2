@@ -1,15 +1,15 @@
-import { winners } from '../../index';
+import { garage, winners } from '../../index';
 import { ICar } from '../../interfaces/ICar';
-import { IWinners } from '../../interfaces/IWinners';
 import { Container } from '../container/index';
 import { clear } from '../../utils/helpers';
 import { Button } from '../../components/button/index';
 import './style.css';
 import { Sort } from '../sort/index';
+import { Car } from '../../components/car/index';
 
-export const Table = (items: Array<IWinners>, cars: Array<ICar>, n: number) => {
+export const Table = (n: number) => {
 
-  const pageCount = Math.ceil(items.length / 10);
+  const pageCount = Math.ceil(winners.length / 10);
   let currentPage = n;
   localStorage['pageWinners'] = currentPage;
 
@@ -26,24 +26,49 @@ export const Table = (items: Array<IWinners>, cars: Array<ICar>, n: number) => {
   table.className = 'table';
   
   const tr = document.createElement('tr');
-  tr.innerHTML = `<th>Number</th><th>Car</th><th>Wins</th><th>Best Time (seconds)</th>`;
+  tr.innerHTML = `<th>Number</th><th>Car Name</th><th>Car Color</th><th>Wins</th><th>Best Time (seconds)</th>`;
   tr.className = 'tr-headers';
 
   table.append(tr);
 
-  for (let item of items.slice(minItems, maxItems)) {
-    const index = items.indexOf(item);
-    const car: ICar = cars.find(i => i.id === item.id)!;
-    const tr = document.createElement('tr');
-    tr.className = 'tr-lines';
+  for (let item of winners.slice(minItems, maxItems)) {
+    const index = winners.indexOf(item);
+    const car: ICar = garage.find(i => i.id === item.id)!;
+    if (car !== undefined) {
+      const tr = document.createElement('tr');
+      tr.className = 'tr-lines';
+      
+      const tdNumber = document.createElement('td');
+      tdNumber.innerHTML = `${index + 1}`;
 
-    tr.innerHTML = `<td>${index + 1}</td><td>${car.name}</td><td>${item.wins}</td><td>${item.time.toFixed(2)}</td>`;
+      const tdName = document.createElement('td');
+      tdName.innerHTML = `${car.name}`;
 
-    table.append(tr);
+      const tdCar = document.createElement('td');
+      tdCar.append(Car(car));
+
+      const tdWins = document.createElement('td');
+      tdWins.innerHTML = `${item.wins}`;
+
+      const tdTime = document.createElement('td');
+      tdTime.innerHTML = `${item.time.toFixed(2)}`;
+
+      tr.append(tdNumber, tdName, tdCar, tdWins, tdTime);
+  
+      table.append(tr);
+    }
   }
 
-  const prevBtn = Button('previous', () => {});
-  const nextBtn = Button('next', () => {});
+  const prevBtn = Button('previous', () => {
+    if (currentPage !== 1) currentPage--;
+    clear('page-table');
+    document.querySelector('.winners')?.append(Table(currentPage));
+  });
+  const nextBtn = Button('next', () => {
+    if (currentPage !== pageCount) currentPage++;
+    clear('page-table');
+    document.querySelector('.winners')?.append(Table(currentPage));
+  });
 
   const pageBtns = Container([prevBtn], 'row wrap');
   for (let i = 1; i <= pageCount; i++) {
@@ -51,7 +76,7 @@ export const Table = (items: Array<IWinners>, cars: Array<ICar>, n: number) => {
       e?.preventDefault();
       currentPage = i;
       clear('page-table');
-      document.querySelector('.winners')?.append(Table(winners, cars, currentPage));
+      document.querySelector('.winners')?.append(Table(currentPage));
     });
     if (btn.innerHTML !== `${currentPage}`) {
       btn.classList.add('button-background-none');
