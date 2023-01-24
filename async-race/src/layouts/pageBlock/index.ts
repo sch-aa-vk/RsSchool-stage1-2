@@ -20,8 +20,20 @@ export const pageBlock = (garage: Array<ICar>, n: number) => {
 
   let cars = CarsBlock(currentPage);
 
-  const prevBtn = Button('previous', () => {});
-  const nextBtn = Button('next', () => {});
+  const prevBtn = Button('previous', () => {
+    if (currentPage !== 1) currentPage--;
+    clear('page-block');
+    clear('form');
+    document.querySelector('.garage')?.append(Form(currentPage));
+    document.querySelector('.garage')?.append(pageBlock(garage, currentPage));
+  });
+  const nextBtn = Button('next', () => {
+    if (currentPage !== pageCount) currentPage++;
+    clear('page-block');
+    clear('form');
+    document.querySelector('.garage')?.append(Form(currentPage));
+    document.querySelector('.garage')?.append(pageBlock(garage, currentPage));
+  });
 
   const pageBtns = Container([prevBtn], 'row wrap');
   for (let i = 1; i <= pageCount; i++) {

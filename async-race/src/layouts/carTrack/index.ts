@@ -27,7 +27,8 @@ export const CarTrack = (car: ICar) => {
   const removeBtn = Button('remove', async (e) => {
     e?.preventDefault();
     await deleteCar(generateURL(`garage/${car.id}`));
-    garage.splice(car.id - 1, 1);
+    const index = garage.findIndex((item) => item.id === car.id);
+    garage.splice(index, 1);
     clearPage();
     document.body.append(Garage(garage));
   });
@@ -40,39 +41,38 @@ export const CarTrack = (car: ICar) => {
 
   const startBtn = Button('a', async (e) => {
     e?.preventDefault();
-    startBtn.classList.add('button-background-none');
     startBtn.setAttribute('disabled', 'disabled');
-    endBtn.removeAttribute('disabled');
-    endBtn.classList.remove('button-background-none');
     let data: IEngine = await fetch(generateURL(`engine?id=${car.id}&status=started`), {
       method: 'PATCH'
     }).then(responce => responce.json());
-    carFigure.style.animation = `animate ${data.distance / (data.velocity * window.innerWidth)}s linear 1 forwards`;
+    carFigure.style.animation = `animate ${data.distance / (data.velocity * 1440)}s linear 1 forwards`;
     fetch(generateURL(`engine?id=${car.id}&status=drive`), {
       method: 'PATCH'
     }).then(responce => {
       if (!responce.ok) {
         carFigure.style.left = `${carFigure.getBoundingClientRect().left - 20}px`;
         carFigure.style.animation = '';
-        endBtn.setAttribute('disabled', 'disabled');
-        endBtn.classList.add('button-background-none');
+        endBtn.removeAttribute('disabled');
       }
     })
+    setTimeout(() => {
+      endBtn.removeAttribute('disabled');
+    }, data.distance / (data.velocity * 1440) * 1000);
   });
 
   const endBtn = Button('b', async (e) => {
     e?.preventDefault();
-    carFigure.style.left = `${carFigure.getBoundingClientRect().left - 20}px`;
-    carFigure.style.animation = '';
-    startBtn.removeAttribute('disabled');
-    endBtn.classList.add('button-background-none');
-    startBtn.classList.remove('button-background-none');
+    // carFigure.style.left = `80px`;
+    // carFigure.style.animation = '';
+    // startBtn.removeAttribute('disabled');
+    // endBtn.setAttribute('disabled', 'disabled');
     await fetch(generateURL(`engine?id=${car.id}&status=stopped`), {
       method: 'PATCH',
     }).then(responce => responce.json());
+    clearPage();
+    document.body.append(Garage(garage));
   });
   endBtn.setAttribute('disabled', 'disabled');
-  endBtn.classList.add('button-background-none');
 
   const containerSecond = Container([startBtn, endBtn], 'row wrap');
   containerSecond.classList.add('second-block');

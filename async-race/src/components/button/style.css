@@ -11,12 +11,21 @@
   background: green;
   box-sizing: border-box;
   text-transform: uppercase;
-  cursor: pointer;
   transition: all 0.4s;
 }
 
-.button-element:hover {
+.button-element:not(:disabled) {
+  cursor: pointer;
+}
+
+.button-element:not(:disabled):hover {
   background: darkgreen;
+}
+
+.button-element:disabled {
+  background: none;
+  color: gray;
+  border-color: gray;
 }
 
 .button-background-none {

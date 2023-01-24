@@ -31,23 +31,24 @@ export const Form = (currentPage: number) => {
     e?.preventDefault();
     const data: Array<IEngine> = [];
     const time: Array<{time: number, id: number}> = [];
-    await Promise.allSettled(items.map((car) => fetch(generateURL(`engine?id=${car.id}&status=started`), {
+    await Promise.all(items.map((car) => fetch(generateURL(`engine?id=${car.id}&status=started`), {
       method: 'PATCH'
-    }).then(responce => responce.json()).then(responce => data.push(responce))));
+    }).then(responce => responce.json())
+    .then(responce => {
+      data.push(responce);
+    })));
     const cars: Array<HTMLElement> = Array.from(document.querySelectorAll('.car'));
     for (let i = 0; i < cars.length; i++) {
       cars[i].style.animation = `animate ${data[i].distance / (data[i].velocity * 1440)}s linear 1 forwards`;
       const startBtn = document.querySelectorAll('#a')[i];
       startBtn.classList.add('button-background-none');
-      time.push({time: data[i].distance / (data[i].velocity * window.innerWidth), id: items[items.length - i - 1].id});
+      time.push({time: data[i].distance / (data[i].velocity * 1440), id: items[items.length - i - 1].id});
     }
     const buttons = document.querySelectorAll('.button-element');
-    const disabledBtns: Element[] = [];
     for (let button of buttons) {
       button.setAttribute('disabled', 'disabled');
-      if (button.classList.contains('button-background-none')) disabledBtns.push(button);
-      button.classList.add('button-background-none');
     }
+    buttonReset.removeAttribute('disabled');
     await Promise.allSettled(items.map((car) => fetch(generateURL(`engine?id=${car.id}&status=drive`), {
       method: 'PATCH'
     }).then(responce => {
@@ -89,27 +90,24 @@ export const Form = (currentPage: number) => {
         setInterval(() => {
           text.style.display = 'none';
         }, 2000);
-        for (let button of buttons) {
-          button.removeAttribute('disabled');
-          button.classList.remove('button-background-none');
-        }
-        for (let button of disabledBtns) {
-          button.classList.add('button-background-none');
-        }
+        buttonReset.removeAttribute('disabled');
         await items.map((car) => fetch(generateURL(`engine?id=${car.id}&status=stopped`), {
           method: 'PATCH'
         }))
       }, 10);
     }, 10)
   });
+
   const buttonReset = Button('reset', async (e) => {
     e?.preventDefault();
-    const cars: Array<HTMLElement> = Array.from(document.querySelectorAll('.car'));
-    cars.forEach((car) => {
-      car.style.left = '80px';
-      car.style.animation = '';
-    })
+    const buttons = document.querySelectorAll('.button-element');
+    for (let button of buttons) {
+      button.removeAttribute('disabled');
+    }
+    clearPage();
+    document.body.append(Garage(garage));
   });
+  buttonReset.setAttribute('disabled', 'disabled');
   const buttonGenCars = Button('generate cars', async (e) => {
     e?.preventDefault();
     const btn = document.querySelector('#generatecars') as HTMLElement;
