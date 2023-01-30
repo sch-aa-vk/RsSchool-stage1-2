@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Canvas</h1>
+				</section>
+				<section>
+					<h4>documentation</h4>
+					<section>
+						<p>&lt;canvas&gt; element is used to draw graphics and animation using JavaScript. It provides APIs to manipulate photos, tools to create games and animations</p>
+					</section>
+					<section>
+						<h6>Attributes</h6>
+						<ul>
+							<li>height: defaults to 150</li>
+							<li>moz-opaque</li>
+							<li>width: defaults to 300</li>
+							<li>...global attributes</li>
+						</ul>
+					</section>
+					<section>
+						<img src="https://miro.medium.com/v2/resize:fit:960/format:webp/1*D_MWsJiU74ZhIqEwXafrmA.png" alt="">
+						<p>square at position (0,0)</p>
+					</section>
+					<section>
+						<h6>Context</h6>
+						<p>Canvas allows drawing and pixel manipulation using JavaScript API. This drawing has to be performed on canvas’ context. Think of context as a page to paint and API as available tools (or brushes). The context can either be “2d” or “webgl”(3d). </p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h4>Canvas API</h4>
+						<p>The Canvas API provides a means for drawing graphics via JavaScript and the HTML &lt;canvas&gt; element. The Canvas API largely focuses on 2D graphics.</p>
+					</section>
+					<section>
+						<h4>Basic shapes</h4>
+						<h6>Rectangle</h6>
+						<pre>
+	const ctx = canvas.getContext("2d")
+	// fill color of rectangle
+	ctx.fillStyle = "tomato"    
+	<i>// draw rectangle, and fill it with "tomato" color </i>
+	// x = 10  
+	// y = 20  
+	// width = 200  
+	// height = 300  
+	ctx.fillRect(10, 20, 200, 300)
+	// now change style to stroke 
+	ctx.strokeStyle = "green"    
+	// draw rectangle with "green" color stroke (no fill)  
+	ctx.strokeRect(100, 100, 200, 100)
+						</pre>	
+					</section>
+					<section>
+						<h6>circle</h6>
+						<pre>
+		// Step 1. Invoke path method
+		ctx.beginPath()
+		
+		// Step 2. Creating a circular path
+		// x = 300
+		// y = 320
+		// start angle =  0
+		// end angle = 360 or 2*PI
+		ctx.arc(300, 320, 75, 0, 2*Math.PI)
+		
+		// Fill with Lavender color
+		ctx.fillStyle = "Lavender"
+		
+		//Step 3. Now ink on canvas 
+		ctx.fill()		
+	</pre>
+					</section>
+					<section>
+						<h6>Line</h6>
+						<pre>
+			ctx.beginPath();
+			// Point A
+			ctx.moveTo(350, 50);
+			// Point B
+			ctx.lineTo(400, 100);
+			
+			ctx.strokeStyle = "DeepPink"
+			ctx.stroke();		
+						</pre>
+					</section>
+					<section>
+						<h6>Triangle</h6>
+						<pre>
+		ctx.beginPath();
+		
+		// Point A
+		ctx.moveTo(250, 250);
+		
+		// Point B
+		ctx.lineTo(500, 400);
+		
+		// Point C
+		ctx.lineTo(100, 25);
+		
+		// Join C & A
+		ctx.closePath()
+		ctx.strokeStyle = "Navy"
+		ctx.stroke();
+						</pre>
+					</section>
+				</section>
+				<section>
+					<h4>Example #1</h4>
+					<section>
+						<video controls="" src="https://res.cloudinary.com/css-tricks/video/upload/v1588889054/airpods-animation_g2qstg.mp4" name="fitvid1"></video>
+					</section>
+					<section>
+						<p>We can use simple CSS and JS to create such an animation. The point is to focus on the position of the scroll to change the picture inside the canvas element to get the effect of movement</p>
+					</section>
+				</section>
+				<section>
+					<h4>Example #2</h4>
+					<section>
+						<iframe src="https://codepen.io/alexzaworski/pen/mEZvrG" frameborder="0" width="900" height="500"></iframe>
+					</section>
+					<section>
+						<a href="https://codepen.io/alexzaworski/pen/mEZvrG">more examples you can find here</a>
+					</section>
+				</section>
+				<section>
+					<h4>WebGL</h4>
+					<section>
+						<p>WebGL (Web Graphics Library) is a JavaScript API for rendering high-performance interactive 3D and 2D graphics within any compatible web browser without the use of plugins.</p>
+					</section>
+					<section>
+						<p>WebGL programs consist of control code written in JavaScript and shader code (GLSL) that is executed on a computer's Graphics Processing Unit (GPU). WebGL elements can be mixed with other HTML elements and composited with other parts of the page or page background.</p>
+					</section>
+				</section>
+				<section>
+					<h4>Example #1</h4>
+					<section>
+						<iframe width="670" height="500" src="https://mdn.github.io/dom-examples/webgl-examples/tutorial/sample5/index.html" loading="lazy"></iframe>
+					</section>
+					<section>
+						<a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial/Creating_3D_objects_using_WebGL">here you can see the code</a>
+					</section>
+				</section>
+				<section>
+					<h4>Example #2</h4>
+					<section>
+						<iframe width="670" height="510" src="https://mdn.github.io/dom-examples/webgl-examples/tutorial/sample8/index.html" loading="lazy"></iframe>
+					</section>
+					<section>
+						<a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial/Animating_textures_in_WebGL">here you can see the code</a>
+					</section>
+				</section>
+				<section>
+					<h4>Example #3</h4>
+					<section>
+						<iframe src="https://madebyevan.com/webgl-water/" frameborder="0" width="1000" height="500"></iframe>
+					</section>
+					<section>
+						<a href="https://habr.com/ru/post/190388/">another exmaples of using WebGL</a>
+					</section>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
